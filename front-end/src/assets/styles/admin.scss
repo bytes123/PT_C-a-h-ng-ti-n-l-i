@@ -1,0 +1,79 @@
+.admin_header-wrapper {
+  background-color: $gray-color;
+}
+
+.admin_header-message,
+.admin_header-notification {
+  position: relative;
+}
+
+.admin_header-message:after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $admin-color;
+  top: 7px;
+  right: 6px;
+}
+
+.admin_header-notification:after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $warning-color;
+  top: 7px;
+  right: 6px;
+}
+.admin_header-profile {
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+.admin_header-profile:hover {
+  background-color: darken($gray-color, 2%);
+  transition: all 0.3s;
+}
+
+.admin_page {
+  background-color: $gray-color;
+  .sidebar_sub-list {
+    a {
+      text-decoration: none;
+    }
+    .sidebar_sub-item.active:hover a {
+      color: $white-color !important;
+    }
+  }
+  .hv {
+    transition: all 0.3s;
+  }
+  .hv:hover {
+    background-color: darken($gray-color, 2%);
+    transition: all 0.3s;
+    border-radius: 100%;
+  }
+  .ant-table-cell {
+    font-size: 1.2rem;
+  }
+}
+
+.sidebar {
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.sidebar.active {
+  display: block;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.sidebar {
+  display: none;
+  opacity: 0;
+  transition: all 0.3s;
+}

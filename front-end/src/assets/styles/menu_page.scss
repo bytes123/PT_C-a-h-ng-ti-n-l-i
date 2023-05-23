@@ -1,0 +1,29 @@
+.menu_list-wrapper {
+  background-color: $primary-color;
+
+  .menu_list {
+    .menu_item.active {
+      background-color: $white-color;
+
+      .menu_item-link {
+        color: $primary-color;
+      }
+    }
+    .menu_item {
+      .menu_item-link {
+        color: white;
+        font-weight: 600;
+        padding: 1.4rem;
+        font-size: 1.4rem;
+        display: inline-block;
+        transition: all 0.3s;
+        @apply font-Signika;
+      }
+      .menu_item-link:hover {
+        background-color: $white-color;
+        color: $primary-color;
+        transition: all 0.3s;
+      }
+    }
+  }
+}

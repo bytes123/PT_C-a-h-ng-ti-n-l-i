@@ -1,0 +1,89 @@
+.item_list-wrapper {
+  .item:hover {
+    transform: translateY(-4px);
+    transition: transform 0.3s;
+  }
+  .item {
+    padding: 2.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    position: relative;
+    transform: translateY(0px);
+    transition: transform 0.3s;
+
+    .item_catalog-label {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    .item_name {
+      font-weight: 700;
+    }
+
+    .label.pink {
+      padding: 0.6rem 2rem;
+      border-top-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      background-color: rgb(236, 39, 72);
+      color: $white-color;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .item_price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: $confirm-btn;
+    }
+
+    .item_price-discount {
+      margin: 0 1rem;
+      text-decoration: line-through;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: $cancel-btn;
+    }
+
+    .item_btn {
+      display: flex;
+      align-items: center;
+      color: $confirm-btn;
+      font-weight: 600;
+      background-color: rgb(222, 249, 236);
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .item_btn:hover {
+      background-color: $confirm-btn;
+      color: $white-color;
+      position: relative;
+      bottom: 2px;
+      transition: all 0.3s;
+    }
+  }
+}
+.seach_section-show {
+  transition: box-shadow 0.3s;
+
+  .filter_value:hover {
+    background-color: #3bb77e !important;
+    color: $white-color !important;
+    transition: all 0.3s;
+
+    .hv {
+      color: $white-color !important;
+      transition: all 0.3s;
+    }
+  }
+
+  .filter_value {
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+}
+.seach_section-show:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: box-shadow 0.3s;
+}

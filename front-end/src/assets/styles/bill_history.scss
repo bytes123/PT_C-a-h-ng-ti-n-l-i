@@ -1,0 +1,139 @@
+.bill_history-wrapper {
+  min-height: 100vh;
+  background-image: url("https://cdn.tgdd.vn/mwgcart/orderhistory/images/bg.png");
+
+  .bill_history {
+    .bill_history-search input {
+      width: 100%;
+      margin: 1rem 0;
+      border: none;
+      outline: none;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #e2e2e2;
+      border-radius: 2px;
+    }
+    .bill_history-table {
+      margin: 1rem 0;
+
+      .empty-basket {
+        background: none;
+        border: none;
+        font-size: 1rem;
+      }
+
+      th,
+      td {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.detail_bill {
+  min-height: 100vh;
+  font-size: 1.2rem;
+
+  .back {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .detail_bill-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    padding: 2rem;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+  .detail_bill-statement {
+    span {
+      padding: 0 1rem;
+    }
+    span:first-child {
+      border-right: 3px solid #333;
+    }
+    .statement {
+      font-weight: 700;
+    }
+  }
+
+  .detail_bill-statement-line {
+    margin: 1rem 0;
+    padding: 2rem;
+    background-color: white;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main_detail-bill {
+    background-color: white;
+
+    h3:first-child {
+      padding: 2rem;
+    }
+    .detail_bill-list {
+      padding: 0 2rem;
+
+      .detail_bill-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-left: none;
+        border-right: none;
+        margin-bottom: 1rem;
+
+        .detail_bill-infor {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+
+          p {
+            color: var(--dark-color);
+          }
+        }
+        .detail_bill-image {
+          width: 120px;
+          margin-right: 1rem;
+        }
+
+        .detail_bill-price {
+          color: var(--danger-color);
+        }
+      }
+    }
+  }
+
+  .detail_bill-total {
+    background-color: white;
+    margin-top: 0.2rem;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+      .detail_bill-label {
+        text-align: right;
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .detail_bill-buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-cancel {
+      padding: 1rem 4rem;
+    }
+  }
+}

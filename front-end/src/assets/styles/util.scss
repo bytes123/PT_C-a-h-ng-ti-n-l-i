@@ -1,0 +1,260 @@
+// MODAL
+.modal-blur.active {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 996;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s;
+}
+
+.modal-blur {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+// SECTION
+
+.section_img {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.section_content {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.section_content.active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.8s ease-in-out;
+  transition-delay: 100ms;
+}
+.section_img.active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 0.8s ease-in-out;
+  transition-delay: 100ms;
+}
+
+// TOOLTIP
+
+.admin_tooltip {
+  position: relative;
+  display: inline-block;
+}
+.admin_tooltip .wrapper {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 999;
+  top: 112%;
+  left: 0;
+  right: 0;
+}
+.admin_tooltip .tooltiptext {
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgb(144, 143, 143);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px 5px;
+
+  font-size: 1rem;
+  transition: opacity 0.3s;
+}
+
+.admin_tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: -32%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgb(144, 143, 143) transparent;
+}
+
+.admin_tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.confirm-btn {
+  background-color: $confirm-btn;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.delete-btn {
+  background-color: $delete-btn;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.edit-btn {
+  background-color: $edit-btn;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.cancel-btn {
+  cursor: pointer;
+  background-color: $cancel-btn;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.error {
+  font-weight: 700;
+  color: $error-color;
+}
+
+.paginated-btn {
+  transition: background-color.3s;
+}
+
+.paginated-btn:not(.disabled):hover {
+  background-color: rgb(22, 163, 74) !important;
+  color: white !important;
+  transition: background-color 0.3s;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.stock-status.out-stock {
+  color: #f74b81;
+  background: #fde0e9;
+}
+
+.stock-status {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.item_star-rate {
+  background-image: url("https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/rating-stars.png");
+  background-position: 0 -12px;
+  background-repeat: repeat-x;
+  height: 12px;
+  width: 60px;
+  transition: all 0.5s ease-out 0s;
+  -webkit-transition: all 0.5s ease-out 0s;
+  display: inline-block;
+}
+
+.item_star-rating {
+  background-image: url("https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/rating-stars.png");
+  height: 12px;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+}
+.border-active {
+  border: 2px solid #3bb77e;
+}
+.text-active {
+  color: #3bb77e;
+}
+
+.background-active {
+  background-color: #3bb77e;
+  transition: all 0.3s;
+}
+
+.background-secondary {
+  background-color: #fff;
+  color: #3bb77e;
+  transition: all 0.3s;
+  border: 1px solid #3bb77e;
+}
+
+.background-active:hover {
+  background-color: #fdc040;
+  transition: all 0.3s;
+}
+
+.background-secondary:hover {
+  color: #3bb77e !important;
+  background-color: #fdc040;
+  transition: all 0.3s;
+}
+
+.text-brand {
+  color: #3bb77e;
+}
+
+a.text-brand:hover {
+  color: #fdc040 !important;
+}
+
+.MuiSlider-thumb {
+  color: #3bb77e;
+}
+
+.MuiSlider-track {
+  color: #3bb77e;
+}
+
+.MuiSlider-rail {
+  color: #3bb77e;
+}
+
+.input-primary {
+  accent-color: #3bb77e !important;
+  color: $white-color;
+}
+
+.btn-primary {
+  background-color: #3bb77e;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #212529;
+  border-color: #212529;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.btn-primary:focus {
+  background-color: #3bb77e;
+}
+
+.btn-primary:hover {
+  color: white !important;
+  background-color: #4ba67b;
+}
+
+.status-label {
+  color: #16a34a;
+  font-weight: 600;
+  background-color: #def9ec;
+}

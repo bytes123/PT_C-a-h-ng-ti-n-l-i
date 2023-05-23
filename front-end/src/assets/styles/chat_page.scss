@@ -1,0 +1,9 @@
+.chat_box-infor.box-shadow {
+  box-shadow: 1px 1px 3px #0d1729;
+}
+
+.msg-body {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}

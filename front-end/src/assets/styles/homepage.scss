@@ -1,0 +1,21 @@
+.home_page {
+  overflow-x: hidden;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #3bb77e !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #3bb77e !important;
+}
+
+.category_item-select:hover {
+  transform: translateY(-4px);
+  transition: all 0.3s;
+}
+
+.category_item-select {
+  transform: translateY(0);
+  transition: all 0.3s;
+}

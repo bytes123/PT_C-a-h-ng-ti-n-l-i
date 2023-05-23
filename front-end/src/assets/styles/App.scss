@@ -1,0 +1,82 @@
+@import-normalize;
+@import "./variable";
+@tailwind base;
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap");
+@layer base {
+  body {
+    @apply font-notosans;
+  }
+}
+html {
+  font-size: 62.5%;
+}
+.App {
+  min-height: 101vh;
+  background-color: $white-color;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.circle-section {
+  border-radius: 100%;
+}
+.error-input {
+  border: 2px solid red !important;
+}
+
+.error-text {
+  margin-left: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: red;
+  line-height: 100%;
+  margin-top: 0.4rem;
+}
+
+.loading-visible {
+  opacity: 1;
+}
+
+.loading-hidden {
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.quanity-wishlist-card {
+  position: absolute;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: -6px;
+  top: -5px;
+  background: #3bb77e;
+  padding: 0.6rem;
+  border-radius: 100%;
+  color: $white-color;
+  font-weight: 600;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+@import "./animation.scss";
+@import "./header.scss";
+@import "./footer.scss";
+@import "./signup-login.scss";
+@import "./homepage.scss";
+@import "./section.scss";
+@import "./util.scss";
+@import "./menu_page.scss";
+@import "./product_page.scss";
+@import "./admin.scss";
+@import "./uploadfile.scss";
+@import "./bill_history.scss";
+@import "./menu_item.scss";
+@import "./address_form.scss";
+@import "./404.scss";

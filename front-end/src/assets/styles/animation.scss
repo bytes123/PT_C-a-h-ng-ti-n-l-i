@@ -1,0 +1,10 @@
+@keyframes roateHeaderBar {
+  from {
+    transform: rotate(0deg);
+    visibility: visible;
+  }
+  to {
+    transform: rotate(-182deg);
+    visibility: hidden;
+  }
+}
