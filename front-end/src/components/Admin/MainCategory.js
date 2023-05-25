@@ -141,6 +141,12 @@ export default function MainCategory() {
       render: (data, arr, index) => <p>{data}</p>,
     },
     {
+      title: "Tên chi nhánh",
+      dataIndex: "branch_name",
+      key: "branch_name",
+      render: (data, arr, index) => <p>{data}</p>,
+    },
+    {
       title: "Ngày tạo",
       dataIndex: "createdAt",
       key: "createdAt",

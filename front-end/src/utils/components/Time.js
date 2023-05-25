@@ -4,7 +4,9 @@ import vi from "date-fns/locale/vi";
 export default function Time({ className, timestamp }) {
   return (
     <span className={className + " capitalize"}>
-      {formatRelative(new Date(timestamp), new Date(), { locale: vi })}{" "}
+      {formatRelative(new Date(timestamp.replace(".000Z", "")), new Date(), {
+        locale: vi,
+      })}{" "}
       {/* Sử dụng locale tiếng Việt */}
     </span>
   );

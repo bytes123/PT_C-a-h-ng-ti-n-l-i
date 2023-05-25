@@ -1,5 +1,5 @@
 "use strict";
-const db = require("../db");
+const { db } = require("../db");
 
 var Messages = {
   getMsgByRoom: function (data, callback) {

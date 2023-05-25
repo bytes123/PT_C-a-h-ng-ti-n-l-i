@@ -142,6 +142,7 @@ const categorySlice = createSlice({
       .addCase(updateCategory.fulfilled, (state, action) => {
         if (action.payload == "CATEGORY_EXISTS") {
           state.errors.name = "Tên danh mục đã tồn tại";
+          console.log("lỗi");
           state.update_status = "failed";
         }
 
@@ -151,6 +152,7 @@ const categorySlice = createSlice({
       })
       .addCase(updateCategory.rejected, (state, action) => {
         state.update_status = "failed";
+
         console.log(action.error);
       })
       .addCase(deleteCategory.pending, (state, action) => {

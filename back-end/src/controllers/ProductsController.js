@@ -2,6 +2,8 @@
 
 const Products = require("../models/Products");
 const DetailProduct = require("../models/DetailProduct");
+const { migrateHorizontal } = require("../utils/utils");
+const { db, sqlserverDB } = require("./../db");
 
 var fs = require("fs");
 const { json } = require("express");
@@ -130,12 +132,22 @@ module.exports = {
 
     data.createdAt = new Date();
 
-    Products.addProduct(data, (err, res) => {
+    Products.addProduct(data, async (err, res) => {
       if (err) {
-        console.log(err);
         result.status(400).json("ADD_FAILED");
       } else {
-        console.log("thành công");
+        try {
+          console.log(data.branch_id == "CN2");
+          if (data.branch_id == "CN2") {
+            await migrateHorizontal(
+              "csdl_cuahangtienloi.products",
+              "SELECT * FROM products WHERE branch_id = 'CN2'"
+            );
+          }
+          console.log("Thành công");
+        } catch (err) {
+          console.log(err);
+        }
         result.status(200).json("ADD_SUCCESS");
       }
     });

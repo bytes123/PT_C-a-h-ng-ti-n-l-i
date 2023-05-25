@@ -31,6 +31,7 @@ export default function useForm(
   };
 
   useEffect(() => {
+    console.log(newrules);
     setErrors(newrules);
   }, [newrules]);
 

@@ -1,5 +1,5 @@
 "use strict";
-const db = require("./../db");
+const { db } = require("./../db");
 
 var Auth = {
   setToken: function (data, callback) {

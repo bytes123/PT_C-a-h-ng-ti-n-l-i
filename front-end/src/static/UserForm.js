@@ -16,6 +16,7 @@ let detailProductPlaceHolder = {
 };
 
 let categoryPlaceHolder = {
+  branch: "* Chọn chi nhánh",
   name: "* Tên danh mục",
 };
 

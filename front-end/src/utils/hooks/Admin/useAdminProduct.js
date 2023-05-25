@@ -130,11 +130,11 @@ export default function useAdminProduct(
 
   useEffect(() => {
     if (add_status == "succeeded") {
-      const reset = async () => {
-        await dispatch(fetchProducts()).unwrap();
-        addSuccess();
-      };
-      reset();
+      // const reset = async () => {
+      //   await dispatch(fetchProducts()).unwrap();
+      //   addSuccess();
+      // };
+      // reset();
     } else {
       console.log("test");
     }

@@ -9,18 +9,18 @@ module.exports = {
   get: (req, res) => {
     Category.getAllCategory((err, response) => {
       if (err) throw err;
-      res.json(response);
+      return res.json(response.recordset);
     });
   },
   getCategoryAndChildren: (req, res) => {
     Category.getAllCategory(async (err, categories) => {
       if (err) return res.status(400).json(err);
 
-      const categoryPromises = categories.map(async (item, index) => {
+      const categoryPromises = categories.recordset.map(async (item, index) => {
         const products = await new Promise((resolve, reject) => {
           Products.getProductsByCategory(item, (err, products) => {
             if (err) reject(err);
-            resolve(products);
+            resolve(products.recordset);
           });
         });
 
@@ -44,16 +44,18 @@ module.exports = {
     data.id = removeVietnameseAccents(data.name).replace(" ", "-");
 
     Category.getCategoryExists(data, (err, res) => {
-      if (!res.length) {
+      console.log(res);
+      if (!res?.recordset.length) {
         Category.addCategory(data, (err, res) => {
           if (err) {
+            console.log(err);
             return result.status(400).json(err);
           } else {
             return result.status(200).json("ADD_SUCCESS");
           }
         });
       } else {
-        return result.status(400).json("CATEGORY_EXISTS");
+        return result.status(200).json("CATEGORY_EXISTS");
       }
     });
   },

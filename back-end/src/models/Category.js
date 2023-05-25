@@ -1,54 +1,57 @@
 "use strict";
-const db = require("./../db");
+const { db, sqlConnection } = require("./../db");
 const { Sequelize } = require("sequelize");
-
+var moment = require("moment");
 var Category = {
   getAllCategory: function (callback) {
-    let sql = "SELECT * FROM categories";
-    return db.query(sql, callback);
+    let sql = `SELECT c.*,b.name branch_name FROM dbo.categories c INNER JOIN branches b ON b.id = c.branch_id`;
+    return sqlConnection.query(sql, callback);
   },
   getCategoryExists: (data, callback) => {
-    let sql = "SELECT * FROM categories WHERE name = ?";
-    return db.query(sql, [data.name], callback);
+    let sql = `SELECT * FROM categories WHERE name = '${data.name}' AND branch_id = '${data.branch_id}'`;
+
+    return sqlConnection.query(sql, callback);
   },
   addCategory: (data, callback) => {
-    let sql = "INSERT INTO categories SET ?";
+    data.createdAt = moment(data.createdAt, "YYYY-MM-DD HH:mm:ss").format(
+      "YYYY/MM/DD HH:mm:ss"
+    );
 
-    return db.query(sql, [data], callback);
+    const columns = Object.keys(data).join(", ");
+    const values = Object.values(data)
+      .map((value) => (typeof value === "string" ? `N'${value}'` : value))
+      .join(", ");
+
+    const sql = `INSERT INTO categories (${columns}) VALUES (${values})`;
+
+    return sqlConnection.query(sql, callback);
   },
   updateCategory: (data, callback) => {
-    let sql = "UPDATE categories SET ? WHERE id = ?";
+    let query = [];
 
-    return db.query(sql, [data.category, data.current_id], callback);
+    data.category.updatedAt = moment(
+      data.category.updatedAt,
+      "YYYY-MM-DD HH:mm:ss"
+    ).format("YYYY/MM/DD HH:mm:ss");
+
+    Object.keys(data.category).forEach((key) => {
+      query.push(`${key} = '${data.category[key]}'`);
+    });
+
+    query = query.join(",", "");
+
+    let sql = `UPDATE categories SET ${query} WHERE id = '${data.current_id}'`;
+
+    return sqlConnection.query(sql, callback);
   },
   deleteCategory: (data, callback) => {
-    let sql = "DELETE  FROM categories WHERE id = ?";
+    let sql = `DELETE  FROM categories WHERE id = '${data.id}'`;
 
-    return db.query(sql, [data.id], callback);
+    return sqlConnection.query(sql, callback);
   },
   searchCategory: (data, callback) => {
     let sql = "SELECT * FROM categories WHERE name LIKE ?";
     return db.query(sql, [`${data.value}%`], callback);
-  },
-  Categories: () => {
-    const categories = {
-      id: {
-        type: Sequelize.STRING(50),
-        primaryKey: true,
-      },
-      name: {
-        type: Sequelize.STRING(50),
-      },
-      createdAt: {
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: true,
-      },
-    };
-
-    return categories;
   },
 };
 

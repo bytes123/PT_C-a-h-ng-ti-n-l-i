@@ -90,6 +90,8 @@ export default function useAdminCategory(
         addSuccess();
       };
       reset();
+    } else if (add_status == "failed") {
+      console.log(1);
     }
 
     return () => {
@@ -141,10 +143,7 @@ export default function useAdminCategory(
   }, [delete_status]);
 
   useEffect(() => {
-    console.log(fetchCategories);
-    if (fetchCategories?.length) {
-      setCategories(fetchCategories);
-    }
+    setCategories(fetchCategories);
   }, [fetchCategories]);
 
   return {
