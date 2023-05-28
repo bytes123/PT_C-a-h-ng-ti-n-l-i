@@ -7,12 +7,14 @@ const { json } = require("express");
 module.exports = {
   get: (req, res) => {
     DetailProduct.getAllDetailProduct((err, response) => {
+      console.log(err);
       if (err) return res.status(400).json(err);
-      const details_product = response.map((item) => {
+      const details_product = response.recordset.map((item) => {
         return {
           ...item,
           price: item.price + "",
           discount: item.discount + "",
+          quantity: item.quantity + "",
         };
       });
       res.status(200).json(details_product);
@@ -22,7 +24,8 @@ module.exports = {
     const data = req.body;
     data.createdAt = new Date();
     DetailProduct.addDetailProduct(data, (err, response) => {
-      if (err) return res.status(400).json("ADD_FAILED");
+      console.log(err);
+      if (err) return result.status(400).json("ADD_FAILED");
       console.log("Thành công");
       result.status(200).json("ADD_SUCCESS");
     });
@@ -59,11 +62,12 @@ module.exports = {
     const data = req.body;
     DetailProduct.searchDetailProduct(data, (err, response) => {
       if (err) return res.status(400).json(err);
-      const details_product = response.map((item) => {
+      const details_product = response.recordset.map((item) => {
         return {
           ...item,
           price: item.price + "",
           discount: item.discount + "",
+          quantity: item.quantity + "",
         };
       });
       result.status(200).json(details_product);

@@ -18,6 +18,7 @@ export default function UpdateForm({ updateValues }) {
     await dispatch(
       updateBrand({
         brand: newValues,
+        branch_id: updateValues.branch_id,
         current_id: updateValues.id,
       })
     ).unwrap();

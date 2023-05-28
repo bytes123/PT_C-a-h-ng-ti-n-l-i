@@ -31,7 +31,6 @@ export default function useFilterProducts(type, quantity) {
 
   useEffect(() => {
     if (type && activeCategory) {
-      console.log(type);
       dispatch(
         fetchTopProducts({
           category_id: activeCategory,

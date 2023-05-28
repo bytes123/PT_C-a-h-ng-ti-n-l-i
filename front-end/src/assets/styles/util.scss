@@ -184,6 +184,7 @@
 
 .background-active {
   background-color: #3bb77e;
+  color: #fff !important;
   transition: all 0.3s;
 }
 
@@ -195,7 +196,7 @@
 }
 
 .background-active:hover {
-  background-color: #fdc040;
+  background-color: #ffc340 !important;
   transition: all 0.3s;
 }
 

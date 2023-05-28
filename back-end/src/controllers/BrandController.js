@@ -8,7 +8,7 @@ module.exports = {
   get: (req, res) => {
     Brand.getAllBrand((err, response) => {
       if (err) throw err;
-      res.status(200).json(response);
+      res.status(200).json(response.recordset);
     });
   },
   addBrand: (req, result) => {
@@ -18,15 +18,15 @@ module.exports = {
     let notifications = [];
 
     Brand.getBrandExists(data, (err, res) => {
-      if (res.length) {
+      if (res?.recordset.length) {
         notifications.push("BRAND_EXISTS");
       }
       Brand.getPhoneNumberExists(data, (err, res) => {
-        if (res.length) {
+        if (res?.recordset.length) {
           notifications.push("PHONENUMBER_EXISTS");
         }
         Brand.getMailExists(data, (err, res) => {
-          if (res.length) {
+          if (res?.recordset.length) {
             notifications.push("EMAIL_EXISTS");
           }
 
@@ -35,6 +35,7 @@ module.exports = {
           } else {
             Brand.addBrand(data, (err, res) => {
               if (err) {
+                console.log(err);
                 return result.status(400).json(err);
               } else {
                 return result.status(200).json("ADD_SUCCESS");
@@ -46,46 +47,64 @@ module.exports = {
     });
   },
   updateBrand: (req, result) => {
-    const { brand, current_id } = req.body;
-
+    const { brand, branch_id, current_id } = req.body;
+    console.log(brand);
     brand.updatedAt = new Date();
     let notifications = [];
 
-    Brand.getBrandExists(brand, (err, res) => {
-      if (res?.length) {
-        notifications.push("BRAND_EXISTS");
-      }
-
-      Brand.getPhoneNumberExists(brand, (err, res) => {
-        if (res?.length) {
-          notifications.push("PHONENUMBER_EXISTS");
+    Brand.getBrandExists(
+      {
+        name: brand.name,
+        branch_id: branch_id,
+      },
+      (err, res) => {
+        if (res?.recordset?.length) {
+          notifications.push("BRAND_EXISTS");
         }
 
-        Brand.getMailExists(brand, (err, res) => {
-          if (res?.length) {
-            notifications.push("EMAIL_EXISTS");
-          }
+        Brand.getPhoneNumberExists(
+          {
+            phone_number: brand.phone_number,
+            branch_id: branch_id,
+          },
+          (err, res) => {
+            if (res?.recordset?.length) {
+              notifications.push("PHONENUMBER_EXISTS");
+            }
 
-          if (notifications.length) {
-            return result.status(200).json(notifications);
-          } else {
-            Brand.updateBrand(
+            Brand.getMailExists(
               {
-                brand: brand,
-                current_id: current_id,
+                email: brand.email,
+                branch_id: branch_id,
               },
               (err, res) => {
-                if (err) {
-                  return result.status(500).json(err);
+                if (res?.recordset?.length) {
+                  notifications.push("EMAIL_EXISTS");
+                }
+
+                if (notifications.length) {
+                  return result.status(200).json(notifications);
                 } else {
-                  return result.status(200).json("UPDATE_SUCCESS");
+                  Brand.updateBrand(
+                    {
+                      brand: brand,
+                      current_id: current_id,
+                    },
+                    (err, res) => {
+                      if (err) {
+                        return result.status(500).json(err);
+                      } else {
+                        return result.status(200).json("UPDATE_SUCCESS");
+                      }
+                    }
+                  );
                 }
               }
             );
           }
-        });
-      });
-    });
+        );
+      }
+    );
   },
   deleteBrand: (req, result) => {
     const data = req.body;
@@ -104,7 +123,7 @@ module.exports = {
 
     Brand.searchBrand(data, (err, brands) => {
       if (err) throw err;
-      return result.status(200).json(brands);
+      return result.status(200).json(brands.recordset);
     });
   },
 };

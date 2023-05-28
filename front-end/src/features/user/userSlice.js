@@ -115,6 +115,9 @@ const userSlice = createSlice({
     resetErrors(state, status) {
       state.errors = {};
     },
+    resetError(state, status) {
+      state.error = "";
+    },
     resetSearchStatus(state, action) {
       state.search_status = "";
     },
@@ -127,11 +130,11 @@ const userSlice = createSlice({
       .addCase(loginRequest.fulfilled, (state, action) => {
         console.log(action.payload);
         if (action.payload == "FAILED_LOGIN") {
-          return { ...state, error: action.payload }; // Tạo bản sao mới của trạng thái với error được cập nhật
+          state.error = action.payload; // Tạo bản sao mới của trạng thái với error được cập nhật
         }
 
         if (action.payload == "USER_NOT_CONFIRMED") {
-          return { ...state, error: action.payload }; // Tạo bản sao mới của trạng thái với error được cập nhật
+          state.error = action.payload; // Tạo bản sao mới của trạng thái với error được cập nhật
         }
 
         if (typeof action.payload === "object") {
@@ -230,6 +233,7 @@ export const {
   resetUpdateStatus,
   handleSearchUsers,
   resetSearchStatus,
+  resetError,
 } = userSlice.actions;
 
 export default userSlice.reducer;

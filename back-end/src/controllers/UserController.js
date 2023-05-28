@@ -12,10 +12,10 @@ var filePath = "public/resources/avatar/";
 module.exports = {
   getAllUser: async (req, result) => {
     User.getAllUser(async (req, users) => {
-      if (users) {
+      if (users.recordset) {
         User.getAllDetailTypeUser(async (req, res) => {
-          let detail_type_user = res;
-          const merged = users.map((user) => ({
+          let detail_type_user = res.recordset;
+          const merged = users.recordset.map((user) => ({
             ...user,
             detail_type_user: detail_type_user.filter(
               (item) => item.user_name == user.user_name
@@ -59,14 +59,16 @@ module.exports = {
           password: password,
           avatar: avatar,
           email: data.email,
-          isAuth: false,
+          isAuth: true,
+
           createdAt: new Date(),
         }
       : {
           user_name: data.user_name,
           password: password,
           email: data.email,
-          isAuth: false,
+          isAuth: true,
+
           createdAt: new Date(),
         };
 
@@ -90,13 +92,13 @@ module.exports = {
       },
     ];
 
-    User.getUserConfirmed(user, (err, res) => {
-      if (res.length > 0) {
+    User.getUserByName(user, (err, res) => {
+      if (res.recordset.length > 0) {
         notifications.push("USER_EXISTS");
       }
 
       User.getUserByMail(user, (err, res) => {
-        if (res.length > 0) {
+        if (res.recordset.length > 0) {
           notifications.push("EMAIL_EXISTS");
         }
 
@@ -120,22 +122,6 @@ module.exports = {
                             return result.status(400).json(err);
                           }
                         });
-                      });
-
-                      Auth.setToken(auth_data, (err, res) => {
-                        if (!err) {
-                          sendAuthMail(data.email, authen_token)
-                            .then((val) => {
-                              console.log("Gửi mail thành công");
-                            })
-                            .catch((err) => {
-                              console.log(err);
-                              return result.status(400).json(err);
-                            });
-                        } else {
-                          console.log(err);
-                          return result.status(400).json(err);
-                        }
                       });
 
                       notifications.push("SIGNUP_SUCCESS");
@@ -175,14 +161,16 @@ module.exports = {
           password: password,
           avatar: avatar,
           email: data.email,
-          isAuth: true,
+
+          isAuth: 1,
           createdAt: new Date(),
         }
       : {
           user_name: data.user_name,
           password: password,
           email: data.email,
-          isAuth: true,
+
+          isAuth: 1,
           createdAt: new Date(),
         };
 
@@ -200,7 +188,7 @@ module.exports = {
       address: data.address,
     };
 
-    console.log(staff);
+    console.log(user);
 
     const detail_type_user =
       data?.type_user &&
@@ -209,51 +197,46 @@ module.exports = {
         type_user_id: item,
       }));
 
-    User.getUserConfirmed(user, (err, res) => {
-      if (res.length > 0) {
+    User.getUserByName(user, (err, res) => {
+      if (res.recordset.length > 0) {
         notifications.push("USER_EXISTS");
       }
 
       User.getUserByMail(user, (err, res) => {
-        if (res.length > 0) {
+        if (res.recordset.length > 0) {
           notifications.push("EMAIL_EXISTS");
         }
 
         if (notifications.length > 0) {
           return result.send(notifications);
         } else {
-          User.deleteUserNotAuth(user, (err, res) => {
-            if (!err) {
-              User.setUser(user, (err, res) => {
+          User.setUser(user, (err, res) => {
+            if (err) {
+              console.log(err);
+              return result.status(400).json(err);
+            } else {
+              User.setStaff(staff, (err, res) => {
                 if (err) {
                   return result.status(400).json(err);
                 } else {
-                  User.setStaff(staff, (err, res) => {
-                    if (err) {
-                      return result.status(400).json(err);
-                    } else {
-                      if (detail_type_user && detail_type_user?.length) {
-                        detail_type_user.forEach((item) => {
-                          User.setDetailTypeUser(item, (err, res) => {
-                            if (err) {
-                              return result.status(400).json(err);
-                            }
-                          });
-                        });
-                        notifications.push("SIGNUP_SUCCESS");
+                  if (detail_type_user && detail_type_user?.length) {
+                    detail_type_user.forEach((item) => {
+                      User.setDetailTypeUser(item, (err, res) => {
+                        if (err) {
+                          return result.status(400).json(err);
+                        }
+                      });
+                    });
+                    notifications.push("SIGNUP_SUCCESS");
 
-                        return result.send(notifications);
-                      } else {
-                        notifications.push("SIGNUP_SUCCESS");
+                    return result.send(notifications);
+                  } else {
+                    notifications.push("SIGNUP_SUCCESS");
 
-                        return result.send(notifications);
-                      }
-                    }
-                  });
+                    return result.send(notifications);
+                  }
                 }
               });
-            } else {
-              return result.status(400).json(err);
             }
           });
         }
@@ -286,6 +269,7 @@ module.exports = {
       password: password ?? "",
       avatar: avatar ?? "",
       email: data?.email ?? "",
+
       updatedAt: new Date(),
     };
 
@@ -357,7 +341,7 @@ module.exports = {
               },
               (err, res) => {
                 if (err) throw err;
-                if (res.length) {
+                if (res.recordset.length) {
                 } else {
                   User.setDetailTypeUser(
                     { user_name: current_user_name, type_user_id: item.key },
@@ -376,7 +360,7 @@ module.exports = {
               },
               (err, res) => {
                 if (err) throw err;
-                if (res.length) {
+                if (res.recordset.length) {
                   User.deleteDetailTypeUser(
                     { user_name: current_user_name, type_user_id: item.key },
                     (err, res) => {
@@ -400,10 +384,10 @@ module.exports = {
           user_name: user?.user_name,
         },
         (err, res) => {
-          if (res.length) {
+          if (res.recordset.length) {
             notifications.push("USER_EXISTS");
             User.getUserByMail({ email: user?.email }, (err, res) => {
-              if (res.length) {
+              if (res.recordset.length) {
                 notifications.push("EMAIL_EXISTS");
               }
             });
@@ -428,7 +412,7 @@ module.exports = {
           user_name: user.user_name,
         },
         (err, res) => {
-          if (res.length) {
+          if (res.recordset.length) {
             notifications.push("USER_EXISTS");
             return result.send(notifications);
           } else {
@@ -441,7 +425,7 @@ module.exports = {
       user.hasOwnProperty("email")
     ) {
       User.getUserByMail({ email: user?.email }, (err, res) => {
-        if (res.length) {
+        if (res.recordset.length) {
           notifications.push("EMAIL_EXISTS");
           return result.send(notifications);
         } else {
@@ -457,35 +441,32 @@ module.exports = {
     const data = req.body;
     const salt = await bcrypt.genSalt(10);
 
-    User.getUser(data, (err, res) => {
-      if (res.length) {
-        User.getUserConfirmed(res[0], async (err, user) => {
-          if (err) throw err;
-          if (user.length) {
+    User.getUser(data, async (err, res) => {
+      if (res.recordset.length) {
+        User.getUserConfirmed(data, async (err, res) => {
+          if (res.recordset.length) {
             const validPassword = await bcrypt.compare(
               data.password,
-              user[0].password
+              res.recordset[0].password
             );
 
             if (validPassword) {
               User.getDetailTypeUser(data, async (err, type_user) => {
                 if (err) throw err;
-                if (res.length) {
+                if (res.recordset.length) {
                   const data = {
-                    user: user[0],
-                    type_user: type_user,
+                    user: res.recordset[0],
+                    type_user: type_user.recordset,
                   };
                   return result.send(data);
                 } else {
-                  const data = user[0];
+                  const data = res[0];
                   return result.send(data);
                 }
               });
             } else {
               return result.status(200).json("FAILED_LOGIN");
             }
-          } else {
-            return result.status(200).json("USER_NOT_CONFIRMED");
           }
         });
       } else {
@@ -523,7 +504,7 @@ module.exports = {
   },
   getAdminTypeUser: (req, result) => {
     User.getAdminTypeUser((err, res) => {
-      return result.status(200).json(res);
+      return result.status(200).json(res.recordset);
     });
   },
   searchUser: (req, result) => {
@@ -531,10 +512,10 @@ module.exports = {
 
     User.searchUser(data, (err, users) => {
       if (err) throw err;
-      if (users) {
+      if (users.recordset) {
         User.getAllDetailTypeUser(async (req, res) => {
-          let detail_type_user = res;
-          const merged = users.map((user) => ({
+          let detail_type_user = res.recordset;
+          const merged = users.recordset.map((user) => ({
             ...user,
             detail_type_user: detail_type_user.filter(
               (item) => item.user_name == user.user_name

@@ -31,16 +31,19 @@ export default function useProducts() {
     dispatch(
       fetchTopProducts({
         type: "newest",
+        category_id: "all",
         quantity: 20,
       })
     ).unwrap();
   }, []);
   useEffect(() => {
-    dispatch(
-      fetchProductById({
-        product_id: productid,
-      })
-    ).unwrap();
+    if (productid) {
+      dispatch(
+        fetchProductById({
+          product_id: productid,
+        })
+      ).unwrap();
+    }
   }, [productid]);
 
   useEffect(() => {

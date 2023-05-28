@@ -20,11 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function MainDetailProduct() {
   const dispatch = useDispatch();
   const { Search } = Input;
-  const [isToast, setIsToast] = useState({
-    style: "",
-    value: false,
-    body: "",
-  });
 
   const addData = (values) => {
     console.log(values);
@@ -47,10 +42,10 @@ export default function MainDetailProduct() {
     isAdd,
     handleOpenEdit,
     handleCloseEdit,
-    handleOpenDelete,
     handleCloseDelete,
-    handleOpenAdd,
+    handleOpenDelete,
     handleCloseAdd,
+    handleOpenAdd,
     idDelete,
   } = useAdminController(
     handleChangeValue,
@@ -71,6 +66,19 @@ export default function MainDetailProduct() {
     }
   };
 
+  const {
+    detailProducts,
+    products,
+    isLoading,
+    handleSearch,
+    isLoadingSearch,
+    isSearch,
+    isLoadingAll,
+    handleOutSearch,
+    setIsToast,
+    isToast,
+  } = useAdminDetailProduct(handleCloseDelete, handleCloseEdit, handleCloseAdd);
+
   const onSearch = async (value, callback) => {
     if (!value) {
       handleSearch(value, () =>
@@ -87,56 +95,7 @@ export default function MainDetailProduct() {
     }
   };
 
-  const resetToast = () => {
-    setIsToast({
-      style: "",
-      value: false,
-      body: "",
-    });
-  };
-
-  const addSuccess = () => {
-    handleCloseAdd();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Thêm chi tiết sản phẩm thành công",
-    });
-  };
-
-  const updateSuccess = () => {
-    handleCloseEdit();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Cập nhật chi tiết sản phẩm thành công",
-    });
-  };
-
-  const deleteSuccess = () => {
-    handleCloseDelete();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Xóa sản phẩm thành công",
-    });
-  };
-
-  const {
-    detailProducts,
-    products,
-    isLoading,
-    handleSearch,
-    isLoadingSearch,
-    isSearch,
-    isLoadingAll,
-    handleOutSearch,
-  } = useAdminDetailProduct(
-    addSuccess,
-    updateSuccess,
-    deleteSuccess,
-    resetToast
-  );
+  console.log(products);
 
   const columns = [
     {
@@ -151,6 +110,12 @@ export default function MainDetailProduct() {
       render: (data, arr, index) => <p className="capitalize">{data}</p>,
     },
     {
+      title: "Tên chi nhánh",
+      dataIndex: "branch_name",
+      key: "branch_name",
+      render: (data, arr, index) => <p className="capitalize">{data}</p>,
+    },
+    {
       title: "Kích cỡ",
       dataIndex: "size",
       key: "size",
@@ -160,7 +125,7 @@ export default function MainDetailProduct() {
       title: "Hàng tồn kho",
       dataIndex: "quantity",
       key: "quantity",
-      render: (data, arr, index) => <p>{data}</p>,
+      render: (data, arr, index) => <p className="capitalize">{data}</p>,
     },
     {
       title: "Giá gốc",

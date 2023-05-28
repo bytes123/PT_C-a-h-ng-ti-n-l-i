@@ -4,7 +4,7 @@ const Category = require("../models/Category");
 const Products = require("../models/Products");
 var fs = require("fs");
 const { json } = require("express");
-
+var uuidv1 = require("uuidv1");
 module.exports = {
   get: (req, res) => {
     Category.getAllCategory((err, response) => {
@@ -16,16 +16,18 @@ module.exports = {
     Category.getAllCategory(async (err, categories) => {
       if (err) return res.status(400).json(err);
 
-      const categoryPromises = categories.recordset.map(async (item, index) => {
-        const products = await new Promise((resolve, reject) => {
-          Products.getProductsByCategory(item, (err, products) => {
-            if (err) reject(err);
-            resolve(products.recordset);
+      const categoryPromises = categories?.recordset
+        .filter((item) => item.branch_id == "CN1")
+        .map(async (item, index) => {
+          const products = await new Promise((resolve, reject) => {
+            Products.getProductsByCategory(item, (err, products) => {
+              if (err) reject(err);
+              resolve(products.recordset);
+            });
           });
-        });
 
-        return { ...item, children: products };
-      });
+          return { ...item, children: products };
+        });
 
       const categoriesWithProducts = await Promise.all(categoryPromises);
 
@@ -41,7 +43,7 @@ module.exports = {
 
     data.name = data.name.trim();
     data.createdAt = new Date();
-    data.id = removeVietnameseAccents(data.name).replace(" ", "-");
+    data.id = removeVietnameseAccents(data.name).replace(" ", "-") + uuidv1();
 
     Category.getCategoryExists(data, (err, res) => {
       console.log(res);
@@ -70,7 +72,7 @@ module.exports = {
     };
 
     Category.getCategoryExists(data, (err, res) => {
-      if (!res.length) {
+      if (!res.recordset.length) {
         Category.updateCategory(
           {
             category: category,
@@ -106,7 +108,7 @@ module.exports = {
     console.log(data);
     Category.searchCategory(data, (err, categories) => {
       if (err) throw err;
-      return result.status(200).json(categories);
+      return result.status(200).json(categories.recordset);
     });
   },
 };

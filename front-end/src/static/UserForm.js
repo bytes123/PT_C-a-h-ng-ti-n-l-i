@@ -75,6 +75,34 @@ const rulesDetailProduct = {
       pattern: "^([-]?[1-9][0-9]*|0)$",
       message: "Vui lòng nhập giá sản phẩm là số hợp lệ!",
     },
+    () => ({
+      validator(_, value) {
+        if (Number(value) < 1000) {
+          return Promise.reject("Vui lòng nhập giá tối thiểu 1.000");
+        }
+        if (Number(value) > 100000000) {
+          return Promise.reject("Vui lòng nhập giá tối đa 100.000.000");
+        }
+        return Promise.resolve();
+      },
+    }),
+  ],
+  quantity: [
+    () => ({
+      validator(_, value) {
+        if (value < 0) {
+          return Promise.reject("Vui lòng nhập tồn kho tối thiểu là 0");
+        }
+        if (value > 1000) {
+          return Promise.reject("Vui lòng nhập tồn kho tối đa là 1000");
+        }
+        return Promise.resolve();
+      },
+    }),
+    {
+      pattern: "^([-]?[1-9][0-9]*|0)$",
+      message: "Vui lòng nhập tồn kho là số hợp lệ!",
+    },
   ],
   discount: [
     {
@@ -88,20 +116,6 @@ const rulesDetailProduct = {
         }
         if (value > 100) {
           return Promise.reject("Vui lòng nhập giảm giá tối đa là 100");
-        }
-        return Promise.resolve();
-      },
-    }),
-  ],
-  quantity: [
-    {
-      pattern: "^([-]?[1-9][0-9]*|0)$",
-      message: "Vui lòng nhập tồn kho là số hợp lệ!",
-    },
-    () => ({
-      validator(_, value) {
-        if (value < 0) {
-          return Promise.reject("Vui lòng nhập tồn kho tối thiểu là 0");
         }
         return Promise.resolve();
       },

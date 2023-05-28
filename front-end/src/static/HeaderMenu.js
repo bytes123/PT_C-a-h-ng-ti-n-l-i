@@ -7,26 +7,26 @@ const DesktopMenu = [
     link: path.home,
     value: "Trang chủ",
   },
-  {
-    key: "introduce",
-    link: path.introduce,
-    value: "Giới thiệu",
-  },
+  // {
+  //   key: "introduce",
+  //   link: path.introduce,
+  //   value: "Giới thiệu",
+  // },
   {
     key: "menu",
     link: path.menu + "/banh-ngot",
     value: "Thực đơn",
   },
-  {
-    key: "gift",
-    link: path.gift,
-    value: "Quà tặng",
-  },
-  {
-    key: "history",
-    link: path.history,
-    value: "Lịch sử",
-  },
+  // {
+  //   key: "gift",
+  //   link: path.gift,
+  //   value: "Quà tặng",
+  // },
+  // {
+  //   key: "history",
+  //   link: path.history,
+  //   value: "Lịch sử",
+  // },
 
   {
     key: "login",

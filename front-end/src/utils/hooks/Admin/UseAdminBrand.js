@@ -133,8 +133,9 @@ export default function useAdminBrand(
   }, []);
 
   useEffect(() => {
-    if (add_status == "succeeded") {
+    if (add_status == "loading") {
       setIsLoading(true);
+    } else if (add_status == "succeeded") {
       const reset = async () => {
         setTimeout(async () => {
           await dispatch(fetchBrands()).unwrap();
@@ -143,7 +144,7 @@ export default function useAdminBrand(
       };
 
       reset();
-    } else {
+    } else if (add_status == "failed") {
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -156,8 +157,9 @@ export default function useAdminBrand(
   }, [add_status]);
 
   useEffect(() => {
-    if (!currentSearch && update_status == "succeeded") {
+    if (update_status == "loading") {
       setIsLoading(true);
+    } else if (!currentSearch && update_status == "succeeded") {
       const reset = async () => {
         setTimeout(async () => {
           await dispatch(fetchBrands()).unwrap();
@@ -167,7 +169,6 @@ export default function useAdminBrand(
 
       reset();
     } else if (currentSearch && update_status == "succeeded") {
-      setIsLoading(true);
       const reset = async () => {
         setTimeout(async () => {
           await dispatch(fetchSearchBrand(currentSearch)).unwrap();
@@ -175,6 +176,8 @@ export default function useAdminBrand(
         }, 2000);
       };
       reset();
+    } else if (update_status == "failed") {
+      setIsLoading(false);
     }
 
     return () => {
@@ -184,7 +187,9 @@ export default function useAdminBrand(
   }, [update_status]);
 
   useEffect(() => {
-    if (!currentSearch && delete_status == "succeeded") {
+    if (delete_status == "loading") {
+      setIsLoading(true);
+    } else if (!currentSearch && delete_status == "succeeded") {
       const reset = async () => {
         setTimeout(async () => {
           await dispatch(fetchBrands()).unwrap();
@@ -200,6 +205,8 @@ export default function useAdminBrand(
         }, 2000);
       };
       reset();
+    } else if (delete_status == "failed") {
+      setIsLoading(false);
     }
 
     return () => {

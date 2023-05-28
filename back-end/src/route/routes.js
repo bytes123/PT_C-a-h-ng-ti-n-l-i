@@ -69,7 +69,6 @@ module.exports = function (app) {
 
   // API SẢN PHẨM
   app.route("/product").get(productsCtrl.get);
-  app.route("/main-product").get(productsCtrl.getAllMainProduct);
   app.route("/top-products").post(productsCtrl.getTopProducts);
   app
     .route("/add-product/:productId")

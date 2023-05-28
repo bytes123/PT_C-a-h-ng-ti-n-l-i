@@ -53,7 +53,7 @@ export default function AddForm() {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
           }}
         >
-          <h3 className=" font-bold mb-5 text-3xl">Thông tin danh mục</h3>
+          <h3 className="font-quicksand font-semibold mb-2">Tên danh mục</h3>
           {isSelectedBranch ? (
             <Form form={form} onFinish={handleSubmit}>
               {errors?.name ? (
@@ -64,6 +64,9 @@ export default function AddForm() {
                   validateStatus={"error"}
                   help={errors.name}
                 >
+                  <h3 className="font-quicksand font-semibold mb-2">
+                    Tên danh mục
+                  </h3>
                   <Input
                     onFocus={() => handleFocusPlaceHolder("name")}
                     onBlur={handleBlurPlaceHolder}
@@ -93,9 +96,7 @@ export default function AddForm() {
             </Form>
           ) : (
             <Form form={form} onFinish={handleSubmitBranch}>
-              <h3 className="font-quicksand font-semibold mb-2">
-                Chi nhánh phân tán
-              </h3>
+              <h3 className="font-quicksand font-semibold mb-2">Chi nhánh</h3>
               <Form.Item name="branch_id" rules={rules.branch_id}>
                 <Select placeholder="Chọn chi nhánh" allowClear>
                   {branches.map((item) => (

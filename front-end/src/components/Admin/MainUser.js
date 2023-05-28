@@ -310,13 +310,13 @@ export default function MainUser() {
       key: "createdAt",
       render: (data, arr, index) => <Time timestamp={data} />,
     },
-    {
-      title: "Thời gian cập nhật gần nhất",
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      render: (data, arr, index) =>
-        data ? <Time timestamp={data} /> : "Chưa cập nhật lần nào",
-    },
+    // {
+    //   title: "Thời gian cập nhật gần nhất",
+    //   dataIndex: "updatedAt",
+    //   key: "updatedAt",
+    //   render: (data, arr, index) =>
+    //     data ? <Time timestamp={data} /> : "Chưa cập nhật lần nào",
+    // },
 
     {
       title: "Hành động",

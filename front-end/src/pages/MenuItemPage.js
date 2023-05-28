@@ -56,32 +56,7 @@ export default function MenuItemPage() {
     classifyMenu,
   } = useClassifySection(sortChildren, displayChildren);
 
-  const [items, setItems] = useState([
-    {
-      key: nanoid(),
-      catalog_name: "Bánh",
-      product_name: "Bánh mì sữa bò tươi ngon",
-      product_starpoint: 3,
-      product_price: "5900000",
-      product_discount: "200000",
-    },
-    {
-      key: nanoid(),
-      catalog_name: "Bánh",
-      product_name: "Bánh mì sữa bò tươi ngon",
-      product_starpoint: 3,
-      product_price: "5900000",
-      product_discount: "200000",
-    },
-    {
-      key: nanoid(),
-      catalog_name: "Bánh",
-      product_name: "Bánh mì sữa bò tươi ngon",
-      product_starpoint: 3,
-      product_price: "5900000",
-      product_discount: "200000",
-    },
-  ]);
+  const [items, setItems] = useState([]);
 
   const { products } = useProducts();
 

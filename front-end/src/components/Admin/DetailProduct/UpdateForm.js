@@ -80,9 +80,13 @@ export default function Update({ products, updateValues }) {
                   onChange={handleChangeProduct}
                 >
                   {products.length &&
-                    products.map((item) => (
-                      <Option value={item.id}>{item.name}</Option>
-                    ))}
+                    products
+                      .filter(
+                        (item) => item.branch_id == updateValues.branch_id
+                      )
+                      .map((item) => (
+                        <Option value={item.id}>{item.name}</Option>
+                      ))}
                 </Select>
               </Form.Item>
 
@@ -103,6 +107,8 @@ export default function Update({ products, updateValues }) {
               </h3>
               <Form.Item name="quantity" rules={rules.quantity}>
                 <Input
+                  name="quantity"
+                  onChange={handleChangeInput}
                   onFocus={() => handleFocusPlaceHolder("quantity")}
                   onBlur={handleBlurPlaceHolder}
                   placeholder={placeHolder.quantity}

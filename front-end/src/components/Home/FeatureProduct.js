@@ -12,7 +12,7 @@ export default function FeatureProduct({
 }) {
   const { handleActiveCategory, activeCategory, categoryList } =
     useFilterProducts(type, quantity);
-
+  console.log(categoryList);
   return (
     <div className="my-20 px-10">
       <div>
@@ -22,20 +22,22 @@ export default function FeatureProduct({
         <div>
           <ul className="flex flex-wrap mt-5 font-quicksand">
             {categoryList
-              ? categoryList.map((item, index) => (
-                  <li
-                    className={`category_item-select font-semibold mt-5 text-2xl cursor-pointer mr-5 ${
-                      !activeCategory && index == 0
-                        ? "text-brand"
-                        : activeCategory == item.id
-                        ? "text-brand"
-                        : ""
-                    }`}
-                    onClick={() => handleActiveCategory(item.id)}
-                  >
-                    <p>{item.name}</p>
-                  </li>
-                ))
+              ? categoryList
+                  .filter((item) => item.branch_id == "CN1" || item.id == "all")
+                  .map((item, index) => (
+                    <li
+                      className={`category_item-select font-semibold mt-5 text-2xl cursor-pointer mr-5 ${
+                        !activeCategory && index == 0
+                          ? "text-brand"
+                          : activeCategory == item.id
+                          ? "text-brand"
+                          : ""
+                      }`}
+                      onClick={() => handleActiveCategory(item.id)}
+                    >
+                      <p>{item.name}</p>
+                    </li>
+                  ))
               : ""}
           </ul>
         </div>

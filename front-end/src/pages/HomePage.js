@@ -31,14 +31,14 @@ export default function HomePage() {
         products={topProducts}
       />
 
-      <ContentSectionFirst />
+      {/* <ContentSectionFirst />
       <FeatureProduct
         type="sellest"
         title="Sản phẩm bán chạy"
         gridCol={"5"}
         quantity={10}
         products={sellestProducts}
-      />
+      /> */}
     </div>
   );
 }

@@ -17,10 +17,9 @@ import {
 } from "../../../features/category/categorySlice";
 import { useLocation } from "react-router-dom";
 export default function useAdminCategory(
-  addSuccess,
-  updateSuccess,
-  deleteSuccess,
-  resetToast
+  handleCloseEdit,
+  handleCloseDelete,
+  handleCloseAdd
 ) {
   const dispatch = useDispatch();
   const fetchCategories = useSelector(getCategories);
@@ -36,6 +35,50 @@ export default function useAdminCategory(
   const search_category = useSelector(getSearchCategory);
   const search_status = useSelector(getSearchStatus);
   const fetch_search_status = useSelector(getFetchSearchStatus);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isToast, setIsToast] = useState({
+    style: "",
+    value: false,
+    body: "",
+  });
+
+  const resetToast = () => {
+    setIsToast({
+      style: "",
+      value: false,
+      body: "",
+    });
+  };
+
+  const addSuccess = () => {
+    handleCloseAdd();
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Thêm danh mục thành công",
+    });
+    setIsLoading(false);
+  };
+
+  const updateSuccess = () => {
+    handleCloseEdit();
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Cập nhật danh mục thành công",
+    });
+    setIsLoading(false);
+  };
+
+  const deleteSuccess = () => {
+    handleCloseDelete();
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Xóa danh mục thành công",
+    });
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     setCategories(search_category);
@@ -84,14 +127,15 @@ export default function useAdminCategory(
   }, []);
 
   useEffect(() => {
-    if (add_status == "succeeded") {
-      const reset = async () => {
+    if (add_status == "loading") {
+      setIsLoading(true);
+    } else if (add_status == "succeeded") {
+      setTimeout(async () => {
         await dispatch(fetchCategory()).unwrap();
         addSuccess();
-      };
-      reset();
+      }, 2000);
     } else if (add_status == "failed") {
-      console.log(1);
+      setIsLoading(false);
     }
 
     return () => {
@@ -101,18 +145,19 @@ export default function useAdminCategory(
   }, [add_status]);
 
   useEffect(() => {
+    if (update_status == "loading") {
+      setIsLoading(true);
+    }
     if (!currentSearch && update_status == "succeeded") {
-      const reset = async () => {
+      setTimeout(async () => {
         await dispatch(fetchCategory()).unwrap();
         updateSuccess();
-      };
-      reset();
+      }, 2000);
     } else if (currentSearch && update_status == "succeeded") {
-      const reset = async () => {
-        await dispatch(fetchSearchCategory(currentSearch)).unwrap();
+      setTimeout(async () => {
+        dispatch(fetchSearchCategory(currentSearch)).unwrap();
         updateSuccess();
-      };
-      reset();
+      }, 2000);
     }
 
     return () => {
@@ -122,18 +167,21 @@ export default function useAdminCategory(
   }, [update_status]);
 
   useEffect(() => {
+    if (delete_status == "loading") {
+      setIsLoading(true);
+    }
     if (!currentSearch && delete_status == "succeeded") {
-      const reset = async () => {
+      setTimeout(async () => {
         await dispatch(fetchCategory()).unwrap();
         deleteSuccess();
-      };
-      reset();
+        setIsLoading(false);
+      }, 2000);
     } else if (currentSearch && delete_status == "succeeded") {
-      const reset = async () => {
+      setTimeout(async () => {
         await dispatch(fetchSearchCategory(currentSearch)).unwrap();
-        updateSuccess();
-      };
-      reset();
+        deleteSuccess();
+        setIsLoading(false);
+      }, 2000);
     }
 
     return () => {
@@ -153,5 +201,8 @@ export default function useAdminCategory(
     isSearch,
     isLoadingAllCategory,
     handleOutSearch,
+    isLoading,
+    isToast,
+    setIsToast,
   };
 }

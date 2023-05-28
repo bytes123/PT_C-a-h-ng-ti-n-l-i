@@ -102,7 +102,6 @@ export default function SignUpForm() {
           boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
         }}
       >
-        <h3 className="text-lg font-bold mb-2">Thông tin tài khoản</h3>
         <Form form={form} onFinish={handleSubmit} initialValues={defaultUser}>
           <Form.Item className="mt-5">
             <Avatar
@@ -110,6 +109,7 @@ export default function SignUpForm() {
               handleChangeAvatar={handleChangeAvatar}
             />
           </Form.Item>
+          <h3 className="font-quicksand font-semibold mb-2">Tài khoản</h3>
           {error && error.user_name ? (
             <Form.Item
               name="user_name"
@@ -136,6 +136,7 @@ export default function SignUpForm() {
               />
             </Form.Item>
           )}
+          <h3 className="font-quicksand font-semibold mb-2">Họ và tên</h3>
           <Form.Item name="fullname" rules={rules.fullname}>
             <Input
               onFocus={() => handleFocusPlaceHolder("fullname")}
@@ -144,6 +145,7 @@ export default function SignUpForm() {
               className="font-medium"
             />
           </Form.Item>
+          <h3 className="font-quicksand font-semibold mb-2">Số điện thoại</h3>
           <Form.Item name="phone_number" rules={rules.phone_number}>
             <Input
               onFocus={() => handleFocusPlaceHolder("phone_number")}
@@ -153,8 +155,8 @@ export default function SignUpForm() {
             />
           </Form.Item>
 
+          <h3 className="text-xl font-semibold mb-3">Giới tính</h3>
           <Form.Item>
-            <h3 className="text-xl font-semibold mb-3">Giới tính</h3>
             <Radio.Group defaultValue={"Nam"}>
               <Radio value={"Nam"}>Nam</Radio>
               <Radio value={"Nữ"}>Nữ</Radio>
@@ -168,7 +170,7 @@ export default function SignUpForm() {
             error={error}
             clearError={clearError}
           />
-          <h3 className="text-lg font-bold mb-2">Bảo mật tài khoản</h3>
+          <h3 className="text-xl font-semibold mb-3">Email</h3>
           {error && error.email ? (
             <Form.Item
               validateStatus={"error"}
@@ -195,6 +197,8 @@ export default function SignUpForm() {
               />
             </Form.Item>
           )}
+
+          <h3 className="text-xl font-semibold mb-3">Mật khẩu</h3>
           <Form.Item name="password" rules={rules.password}>
             <Input.Password
               onFocus={() => handleFocusPlaceHolder("password")}
@@ -203,6 +207,8 @@ export default function SignUpForm() {
               className="font-medium"
             />
           </Form.Item>
+
+          <h3 className="text-xl font-semibold mb-3">Xác nhận mật khẩu</h3>
           <Form.Item
             name="confirmpassword"
             dependencies={["password"]}
@@ -222,7 +228,7 @@ export default function SignUpForm() {
             <Button
               type="primary"
               htmlType="submit"
-              className="form_btn py-6 text-2xl flex items-center justify-center"
+              className="background-active w-full py-6 text-2xl flex items-center justify-center font-quicksand"
             >
               Tạo tài khoản
             </Button>

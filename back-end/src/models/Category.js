@@ -4,11 +4,11 @@ const { Sequelize } = require("sequelize");
 var moment = require("moment");
 var Category = {
   getAllCategory: function (callback) {
-    let sql = `SELECT c.*,b.name branch_name FROM dbo.categories c INNER JOIN branches b ON b.id = c.branch_id`;
+    let sql = `SELECT c.*,b.name branch_name FROM dbo.categories c INNER JOIN branches b ON b.id = c.branch_id ORDER BY c.createdAt DESC`;
     return sqlConnection.query(sql, callback);
   },
   getCategoryExists: (data, callback) => {
-    let sql = `SELECT * FROM categories WHERE name = '${data.name}' AND branch_id = '${data.branch_id}'`;
+    let sql = `SELECT * FROM categories WHERE name = N'${data.name}' AND branch_id = '${data.branch_id}'`;
 
     return sqlConnection.query(sql, callback);
   },
@@ -40,18 +40,19 @@ var Category = {
 
     query = query.join(",", "");
 
-    let sql = `UPDATE categories SET ${query} WHERE id = '${data.current_id}'`;
+    let sql = `UPDATE categories SET ${query} WHERE id = N'${data.current_id}'`;
 
+    console.log(sql);
     return sqlConnection.query(sql, callback);
   },
   deleteCategory: (data, callback) => {
-    let sql = `DELETE  FROM categories WHERE id = '${data.id}'`;
+    let sql = `DELETE  FROM categories WHERE id = N'${data.id}'`;
 
     return sqlConnection.query(sql, callback);
   },
   searchCategory: (data, callback) => {
-    let sql = "SELECT * FROM categories WHERE name LIKE ?";
-    return db.query(sql, [`${data.value}%`], callback);
+    let sql = `SELECT * FROM categories WHERE name LIKE N'${data.value}%'`;
+    return sqlConnection.query(sql, callback);
   },
 };
 

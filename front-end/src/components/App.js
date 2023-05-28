@@ -39,8 +39,6 @@ import AdminChatPage from "./Admin/AdminChatPage";
 
 import { loginedUser } from "../utils/hooks/useAccessUser";
 import { updateOnline } from "../features/authen/authenSlice";
-import MainArea from "./Admin/MainArea";
-import CheckoutPage from "../pages/CheckoutPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -130,23 +128,23 @@ const App = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="admin/quan-ly-tin-nhan"
           element={
             <AdminPage>
               <AdminChatPage />
             </AdminPage>
           }
-        />
+        /> */}
 
-        <Route
+        {/* <Route
           path="admin/quan-ly-tin-nhan/:room_id"
           element={
             <AdminPage>
               <AdminChatPage />
             </AdminPage>
           }
-        />
+        /> */}
 
         <Route
           path="admin/quan-ly-nhan-hang"
@@ -161,15 +159,6 @@ const App = () => {
           element={
             <AdminPage>
               <MainStatistic />
-            </AdminPage>
-          }
-        />
-
-        <Route
-          path="admin/quan-ly-chi-nhanh"
-          element={
-            <AdminPage>
-              <MainArea />
             </AdminPage>
           }
         />
@@ -205,7 +194,7 @@ const App = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="tin-nhan"
           element={
             <Layout className="h-full bg-white">
@@ -213,9 +202,9 @@ const App = () => {
               <UserChatPage />
             </Layout>
           }
-        />
+        /> */}
 
-        <Route
+        {/* <Route
           path="thanh-toan"
           element={
             <Layout className="h-full bg-white">
@@ -233,7 +222,7 @@ const App = () => {
               </Layout>
             }
           />
-        </Route>
+        </Route> */}
 
         <Route
           path="yeu-thich"
@@ -246,7 +235,7 @@ const App = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="gio-hang"
           element={
             <Layout className="h-full bg-white">
@@ -255,7 +244,7 @@ const App = () => {
               <Footer />
             </Layout>
           }
-        />
+        /> */}
 
         <Route
           path="thong-tin-ca-nhan"
@@ -280,7 +269,7 @@ const App = () => {
         />
 
         {/* MENU ROUTE */}
-        <Route
+        {/* <Route
           path="thuc-don/:menuid"
           element={
             <Layout className="h-full bg-white">
@@ -310,7 +299,7 @@ const App = () => {
               <Footer />
             </Layout>
           }
-        />
+        /> */}
 
         {/* ANOTHER ROUTE */}
         <Route

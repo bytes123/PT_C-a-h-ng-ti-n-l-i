@@ -104,7 +104,6 @@ const authenSlice = createSlice({
         if (action.payload.includes("SIGNUP_SUCCESS")) {
           state.errors.user_name = "";
           state.errors.email = "";
-          alert("Vui lòng xác nhận mail để tiếp tục đăng nhập");
           state.signup_status = "succeeded";
         }
 

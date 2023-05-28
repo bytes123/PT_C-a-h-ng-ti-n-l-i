@@ -66,37 +66,37 @@ const sideBarList = [
         text: "Quản lý chi tiết sản phẩm",
       },
 
-      {
-        key: 4,
-        link: "quan-ly-don-hang",
-        icon: <RiBillLine />,
-        text: "Quản lý đơn hàng",
-      },
+      // {
+      //   key: 4,
+      //   link: "quan-ly-don-hang",
+      //   icon: <RiBillLine />,
+      //   text: "Quản lý đơn hàng",
+      // },
       {
         key: 5,
         link: "quan-ly-nguoi-dung",
         icon: <AiOutlineUsergroupAdd />,
         text: "Quản lý tài khoản",
       },
-      {
-        key: 0,
-        link: "quan-ly-tin-nhan",
-        icon: <FiMessageSquare />,
-        text: "Quản lý tin nhắn",
-      },
-      {
-        key: 6,
-        link: "quan-ly-danh-gia",
-        icon: <MdOutlineRateReview />,
-        text: "Quản lý đánh giá",
-      },
+      // {
+      //   key: 0,
+      //   link: "quan-ly-tin-nhan",
+      //   icon: <FiMessageSquare />,
+      //   text: "Quản lý tin nhắn",
+      // },
+      // {
+      //   key: 6,
+      //   link: "quan-ly-danh-gia",
+      //   icon: <MdOutlineRateReview />,
+      //   text: "Quản lý đánh giá",
+      // },
 
-      {
-        key: 8,
-        link: "quan-ly-thong-ke",
-        icon: <FcStatistics />,
-        text: "Quản lý thống kê",
-      },
+      // {
+      //   key: 8,
+      //   link: "quan-ly-thong-ke",
+      //   icon: <FcStatistics />,
+      //   text: "Quản lý thống kê",
+      // },
 
       // {
       //   key: 9,

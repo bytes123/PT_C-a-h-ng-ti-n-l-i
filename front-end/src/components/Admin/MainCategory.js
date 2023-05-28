@@ -16,6 +16,7 @@ import {
   deleteCategory,
   searchCategory,
 } from "../../features/category/categorySlice";
+import Spinner from "../../utils/components/Spinner";
 
 export default function MainCategory() {
   const { Search } = Input;
@@ -24,12 +25,6 @@ export default function MainCategory() {
   const addData = (values) => {
     console.log(values);
   };
-
-  const [isToast, setIsToast] = useState({
-    style: "",
-    value: false,
-    body: "",
-  });
 
   const { values, handleChangeValue, handleSetValue } =
     useValidateForm(addData);
@@ -46,11 +41,11 @@ export default function MainCategory() {
     isEdit,
     isAdd,
     handleOpenEdit,
-    handleCloseEdit,
     handleOpenDelete,
+    handleCloseEdit,
     handleCloseDelete,
-    handleOpenAdd,
     handleCloseAdd,
+    handleOpenAdd,
     idDelete,
   } = useAdminController(
     handleChangeValue,
@@ -59,49 +54,17 @@ export default function MainCategory() {
     clearAdd
   );
 
-  const resetToast = () => {
-    setIsToast({
-      style: "",
-      value: false,
-      body: "",
-    });
-  };
-
-  const addSuccess = () => {
-    handleCloseAdd();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Thêm danh mục thành công",
-    });
-  };
-
-  const updateSuccess = () => {
-    handleCloseEdit();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Cập nhật danh mục thành công",
-    });
-  };
-
-  const deleteSuccess = () => {
-    handleCloseDelete();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Xóa danh mục thành công",
-    });
-  };
-
   const {
     categories,
     handleSearch,
     isLoadingSearch,
     isSearch,
+    isLoading,
     isLoadingAllCategory,
     handleOutSearch,
-  } = useAdminCategory(addSuccess, updateSuccess, deleteSuccess, resetToast);
+    isToast,
+    setIsToast,
+  } = useAdminCategory(handleCloseEdit, handleCloseDelete, handleCloseAdd);
 
   const handleConfirmDelete = async (id) => {
     try {
@@ -194,6 +157,7 @@ export default function MainCategory() {
 
   return (
     <div className="main_catalog mx-2">
+      <Spinner isLoading={isLoading} />
       <Toast
         style={isToast?.style}
         body={isToast?.body}

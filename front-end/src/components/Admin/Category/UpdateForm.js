@@ -15,6 +15,7 @@ export default function UpdateForm({ updateValues }) {
 
   const updateSubmit = async (values) => {
     newValues.current_id = updateValues.id;
+    newValues.branch_id = updateValues.branch_id;
     await dispatch(updateCategory(newValues)).unwrap();
   };
 
@@ -61,9 +62,7 @@ export default function UpdateForm({ updateValues }) {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
           }}
         >
-          <h3 className="text-lg font-bold mb-2 text-3xl">
-            Thông tin danh mục
-          </h3>
+          <h3 className="font-quicksand font-semibold mb-2">Tên danh mục</h3>
           <Form
             form={form}
             onFinish={handleSubmit}

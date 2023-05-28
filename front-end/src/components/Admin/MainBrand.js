@@ -1,12 +1,10 @@
 import React from "react";
 import Section from "../../utils/components/Section";
-import UploadFileExcel from "../../utils/components/UploadFileExcel";
 import useAdminController from "../../utils/hooks/Admin/useAdminController";
 import { Table, Button } from "antd";
 import ConfirmDialog from "../../utils/components/ConfirmDialog";
 import { Input } from "antd";
 import useValidateForm from "../../utils/hooks/Admin/useValidateForm";
-import validateBrand from "../../utils/validates/validateBrand";
 import AddForm from "./Brand/AddForm";
 import UpdateForm from "./Brand/UpdateForm";
 import useAdminBrand from "../../utils/hooks/Admin/UseAdminBrand";
@@ -71,6 +69,12 @@ export default function MainBrand() {
       title: "Tên nhãn hàng",
       dataIndex: "name",
       key: "name",
+      render: (data, arr, index) => <p>{data}</p>,
+    },
+    {
+      title: "Tên chi nhánh",
+      dataIndex: "branch_name",
+      key: "branch_name",
       render: (data, arr, index) => <p>{data}</p>,
     },
     {

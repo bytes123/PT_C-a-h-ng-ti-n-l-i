@@ -211,9 +211,11 @@ export default function AddForm({ categories, brands, updateValues }) {
                 placeholder="Chọn danh mục"
                 allowClear
               >
-                {categories.map((item) => (
-                  <Option value={item.id}>{item.name}</Option>
-                ))}
+                {categories
+                  .filter((item) => item.branch_id == updateValues.branch_id)
+                  .map((item) => (
+                    <Option value={item.id}>{item.name}</Option>
+                  ))}
               </Select>
             </Form.Item>
 
@@ -225,9 +227,11 @@ export default function AddForm({ categories, brands, updateValues }) {
                 allowClear
                 onChange={(value) => handleChangeBrand(value)}
               >
-                {brands.map((item) => (
-                  <Option value={item.id}>{item.name}</Option>
-                ))}
+                {brands
+                  .filter((item) => item.branch_id == updateValues.branch_id)
+                  .map((item) => (
+                    <Option value={item.id}>{item.name}</Option>
+                  ))}
               </Select>
             </Form.Item>
 

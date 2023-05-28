@@ -22,10 +22,9 @@ import {
 } from "../../../features/product/productSlice";
 import { useLocation } from "react-router-dom";
 export default function useAdminDetailProduct(
-  addSuccess,
-  updateSuccess,
-  deleteSuccess,
-  resetToast
+  handleCloseDelete,
+  handleCloseEdit,
+  handleCloseAdd
 ) {
   const dispatch = useDispatch();
   const fetch_detail_products = useSelector(getDetailProducts);
@@ -44,6 +43,49 @@ export default function useAdminDetailProduct(
   const search_detail_product = useSelector(getSearchDetailProducts);
   const search_status = useSelector(getSearchStatus);
   const fetch_search_status = useSelector(getFetchSearchStatus);
+  const [isToast, setIsToast] = useState({
+    style: "",
+    value: false,
+    body: "",
+  });
+
+  const resetToast = () => {
+    setIsToast({
+      style: "",
+      value: false,
+      body: "",
+    });
+  };
+
+  const addSuccess = () => {
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Thêm chi tiết sản phẩm thành công",
+    });
+    setIsLoading(false);
+    handleCloseAdd();
+  };
+
+  const updateSuccess = () => {
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Cập nhật chi tiết sản phẩm thành công",
+    });
+    setIsLoading(false);
+    handleCloseEdit();
+  };
+
+  const deleteSuccess = () => {
+    setIsToast({
+      style: "success",
+      value: true,
+      body: "Xóa sản phẩm thành công",
+    });
+    setIsLoading(false);
+    handleCloseDelete();
+  };
 
   useEffect(() => {
     if (fetch_products.length) {
@@ -52,9 +94,7 @@ export default function useAdminDetailProduct(
   }, [fetch_products]);
 
   useEffect(() => {
-    if (fetch_detail_products.length) {
-      setDetailProducts(fetch_detail_products);
-    }
+    setDetailProducts(fetch_detail_products);
   }, [fetch_detail_products]);
 
   useEffect(() => {
@@ -115,13 +155,12 @@ export default function useAdminDetailProduct(
       const reset = async () => {
         await dispatch(fetchDetailProducts()).unwrap();
         setTimeout(() => {
-          setIsLoading(false);
           addSuccess();
         }, 2000);
       };
 
       reset();
-    } else {
+    } else if (add_status == "failed") {
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -134,12 +173,14 @@ export default function useAdminDetailProduct(
   }, [add_status]);
 
   useEffect(() => {
+    if (update_status == "loading") {
+      setIsLoading(true);
+    }
     if (!currentSearch && update_status == "succeeded") {
       const reset = async () => {
         setIsLoading(true);
         await dispatch(fetchDetailProducts()).unwrap();
         setTimeout(() => {
-          setIsLoading(false);
           updateSuccess();
         }, 2000);
       };
@@ -149,11 +190,14 @@ export default function useAdminDetailProduct(
         setIsLoading(true);
         await dispatch(fetchSearchDetailProduct(currentSearch)).unwrap();
         setTimeout(() => {
-          setIsLoading(false);
           updateSuccess();
         }, 2000);
       };
       reset();
+    } else if (update_status == "failed") {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
 
     return () => {
@@ -163,26 +207,23 @@ export default function useAdminDetailProduct(
   }, [update_status]);
 
   useEffect(() => {
+    if (delete_status == "loading") {
+      setIsLoading(true);
+    }
     if (!currentSearch && delete_status == "succeeded") {
-      const reset = async () => {
-        setIsLoading(true);
+      setTimeout(async () => {
         await dispatch(fetchDetailProducts()).unwrap();
-        setTimeout(() => {
-          setIsLoading(false);
-          deleteSuccess();
-        }, 2000);
-      };
-      reset();
+        deleteSuccess();
+      }, 2000);
     } else if (currentSearch && delete_status == "succeeded") {
-      const reset = async () => {
-        setIsLoading(true);
+      setTimeout(async () => {
         await dispatch(fetchSearchDetailProduct(currentSearch)).unwrap();
-        setTimeout(() => {
-          setIsLoading(false);
-          deleteSuccess();
-        }, 2000);
-      };
-      reset();
+        deleteSuccess();
+      }, 2000);
+    } else if (delete_status == "failed") {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
     }
 
     return () => {
@@ -200,5 +241,7 @@ export default function useAdminDetailProduct(
     isSearch,
     handleOutSearch,
     isLoadingAll,
+    isToast,
+    setIsToast,
   };
 }

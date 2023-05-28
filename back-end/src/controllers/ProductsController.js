@@ -15,14 +15,7 @@ module.exports = {
   get: (req, res) => {
     Products.getAllProduct((err, response) => {
       if (err) throw err;
-      res.status(200).json(response);
-    });
-  },
-  getAllMainProduct: (req, res) => {
-    console.log(1);
-    Products.getAllMainProduct((err, response) => {
-      if (err) throw err;
-      res.status(200).json(response);
+      res.status(200).json(response.recordset);
     });
   },
   getTopProducts: (req, result) => {
@@ -40,7 +33,7 @@ module.exports = {
             if (result) {
               result.status(200).json({
                 type: type,
-                products: response,
+                products: response.recordset,
               });
             }
           }
@@ -51,7 +44,7 @@ module.exports = {
           if (result) {
             result.status(200).json({
               type: type,
-              products: response,
+              products: response.recordset,
             });
           }
         });
@@ -69,7 +62,7 @@ module.exports = {
             if (result) {
               result.status(200).json({
                 type: type,
-                products: response,
+                products: response.recordset,
               });
             }
           }
@@ -80,7 +73,7 @@ module.exports = {
           if (result) {
             result.status(200).json({
               type: type,
-              products: response,
+              products: response.recordset,
             });
           }
         });
@@ -92,7 +85,7 @@ module.exports = {
 
     Products.getProductById(product_id, (err, product) => {
       if (err) result.status(500).json(err);
-      if (product[0]) {
+      if (product.recordset.length) {
         DetailProduct.getDetailByProductId(
           product_id,
           (err, detail_products) => {
@@ -103,7 +96,7 @@ module.exports = {
                 if (err) result.status(500).json(err);
                 if (rates) {
                   return result.status(200).json({
-                    product: product[0],
+                    product: product.recordset,
                     detail_products: detail_products,
                     rates: rates,
                   });
@@ -134,21 +127,10 @@ module.exports = {
 
     Products.addProduct(data, async (err, res) => {
       if (err) {
-        result.status(400).json("ADD_FAILED");
+        console.log(err);
+        return result.status(400).json("ADD_FAILED");
       } else {
-        try {
-          console.log(data.branch_id == "CN2");
-          if (data.branch_id == "CN2") {
-            await migrateHorizontal(
-              "csdl_cuahangtienloi.products",
-              "SELECT * FROM products WHERE branch_id = 'CN2'"
-            );
-          }
-          console.log("Thành công");
-        } catch (err) {
-          console.log(err);
-        }
-        result.status(200).json("ADD_SUCCESS");
+        return result.status(200).json("ADD_SUCCESS");
       }
     });
   },
@@ -196,7 +178,7 @@ module.exports = {
 
     Products.updateProduct(
       {
-        data: data,
+        product: data,
         id: id,
       },
       (err, res) => {
@@ -233,7 +215,7 @@ module.exports = {
     const data = req.body;
     Products.searchProduct(data, (err, products) => {
       if (err) throw err;
-      return result.status(200).json(products);
+      return result.status(200).json(products.recordset);
     });
   },
 };

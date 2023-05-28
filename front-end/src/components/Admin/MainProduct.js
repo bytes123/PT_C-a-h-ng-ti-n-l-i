@@ -10,12 +10,13 @@ import Time from "../../utils/components/Time";
 import AddForm from "./Product/AddForm";
 import UpdateForm from "./Product/UpdateForm";
 import useAdminProduct from "../../utils/hooks/Admin/useAdminProduct";
-// import { resetAllErrors } from "../../features/category/categorySlice";
+import { resetAllErrors } from "../../features/product/productSlice";
 import Toast from "../../utils/components/Toast";
 import {
   deleteProduct,
   searchProduct,
 } from "../../features/product/productSlice";
+import Spinner from "../../utils/components/Spinner";
 
 export default function MainProduct() {
   const { Search } = Input;
@@ -25,20 +26,14 @@ export default function MainProduct() {
     console.log(values);
   };
 
-  const [isToast, setIsToast] = useState({
-    style: "",
-    value: false,
-    body: "",
-  });
-
   const { values, handleChangeValue, handleSetValue } =
     useValidateForm(addData);
 
   const clearUpdate = async () => {
-    // dispatch(resetAllErrors());
+    dispatch(resetAllErrors());
   };
   const clearAdd = async () => {
-    // dispatch(resetAllErrors());
+    dispatch(resetAllErrors());
   };
 
   const {
@@ -47,10 +42,10 @@ export default function MainProduct() {
     isAdd,
     handleOpenEdit,
     handleCloseEdit,
-    handleOpenDelete,
     handleCloseDelete,
-    handleOpenAdd,
     handleCloseAdd,
+    handleOpenDelete,
+    handleOpenAdd,
     idDelete,
   } = useAdminController(
     handleChangeValue,
@@ -58,41 +53,6 @@ export default function MainProduct() {
     clearUpdate,
     clearAdd
   );
-
-  const resetToast = () => {
-    setIsToast({
-      style: "",
-      value: false,
-      body: "",
-    });
-  };
-
-  const addSuccess = () => {
-    handleCloseAdd();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Thêm sản phẩm thành công",
-    });
-  };
-
-  const updateSuccess = () => {
-    handleCloseEdit();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Cập nhật sản phẩm thành công",
-    });
-  };
-
-  const deleteSuccess = () => {
-    handleCloseDelete();
-    setIsToast({
-      style: "success",
-      value: true,
-      body: "Xóa sản phẩm thành công",
-    });
-  };
 
   const {
     products,
@@ -104,7 +64,10 @@ export default function MainProduct() {
     isSearch,
     isLoadingAllProducts,
     handleOutSearch,
-  } = useAdminProduct(addSuccess, updateSuccess, deleteSuccess, resetToast);
+    isLoading,
+    isToast,
+    setIsToast,
+  } = useAdminProduct(handleCloseEdit, handleCloseDelete, handleCloseAdd);
 
   const handleConfirmDelete = async (id) => {
     try {
@@ -225,6 +188,7 @@ export default function MainProduct() {
 
   return (
     <div className="main_catalog mx-2">
+      <Spinner isLoading={isLoading} />
       <Toast
         style={isToast?.style}
         body={isToast?.body}
