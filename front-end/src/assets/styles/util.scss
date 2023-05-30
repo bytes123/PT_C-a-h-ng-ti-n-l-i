@@ -176,23 +176,23 @@
   background-position: 0 0;
 }
 .border-active {
-  border: 2px solid #3bb77e;
+  border: 2px solid #e33b3b;
 }
 .text-active {
-  color: #3bb77e;
+  color: #e33b3b;
 }
 
 .background-active {
-  background-color: #3bb77e;
+  background-color: #e33b3b;
   color: #fff !important;
   transition: all 0.3s;
 }
 
 .background-secondary {
   background-color: #fff;
-  color: #3bb77e;
+  color: #e33b3b;
   transition: all 0.3s;
-  border: 1px solid #3bb77e;
+  border: 1px solid #e33b3b;
 }
 
 .background-active:hover {
@@ -215,24 +215,24 @@ a.text-brand:hover {
 }
 
 .MuiSlider-thumb {
-  color: #3bb77e;
+  color: #e33b3b;
 }
 
 .MuiSlider-track {
-  color: #3bb77e;
+  color: #e33b3b;
 }
 
 .MuiSlider-rail {
-  color: #3bb77e;
+  color: #e33b3b;
 }
 
 .input-primary {
-  accent-color: #3bb77e !important;
+  accent-color: #e33b3b !important;
   color: $white-color;
 }
 
 .btn-primary {
-  background-color: #3bb77e;
+  background-color: #e33b3b;
   padding: 1rem;
   border-radius: 6px;
 }
@@ -246,12 +246,12 @@ a.text-brand:hover {
 }
 
 .btn-primary:focus {
-  background-color: #3bb77e;
+  background-color: #e33b3b;
 }
 
 .btn-primary:hover {
   color: white !important;
-  background-color: #4ba67b;
+  background-color: #f02e2e;
 }
 
 .status-label {

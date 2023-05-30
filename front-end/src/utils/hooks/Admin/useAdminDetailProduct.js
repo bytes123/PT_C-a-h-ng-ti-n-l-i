@@ -88,9 +88,7 @@ export default function useAdminDetailProduct(
   };
 
   useEffect(() => {
-    if (fetch_products.length) {
-      setProducts(fetch_products);
-    }
+    setProducts(fetch_products);
   }, [fetch_products]);
 
   useEffect(() => {

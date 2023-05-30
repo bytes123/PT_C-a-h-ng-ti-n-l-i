@@ -91,7 +91,7 @@ export default function AddForm({ categories, brands, updateValues }) {
   const handleChangeInput = (e) => {
     if (e.target.value == updateValues.name) {
       setErrors({
-        name: "Vui lòng nhập tên sản phẩm khác sản phẩm hiện tại",
+        name: "Vui lòng nhập tên món ăn khác món ăn hiện tại",
       });
     } else {
       setNewValues({
@@ -158,7 +158,7 @@ export default function AddForm({ categories, brands, updateValues }) {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
           }}
         >
-          <h3 className=" font-bold mb-10 text-3xl">Thông tin sản phẩm</h3>
+          <h3 className=" font-bold mb-10 text-3xl">Thông tin món ăn</h3>
 
           <Form
             form={form}
@@ -168,7 +168,7 @@ export default function AddForm({ categories, brands, updateValues }) {
             {errors?.name ? (
               <>
                 <h3 className="font-quicksand font-semibold mb-2">
-                  Tên sản phẩm
+                  Tên món ăn
                 </h3>
                 <Form.Item
                   onChange={() => clearErrors("name")}
@@ -189,7 +189,7 @@ export default function AddForm({ categories, brands, updateValues }) {
             ) : (
               <>
                 <h3 className="font-quicksand font-semibold mb-2">
-                  Tên sản phẩm
+                  Tên món ăn
                 </h3>
                 <Form.Item name="name" rules={rules.name}>
                   <Input
@@ -236,7 +236,7 @@ export default function AddForm({ categories, brands, updateValues }) {
             </Form.Item>
 
             <h3 className="font-quicksand font-semibold mb-2">
-              Giới thiệu sản phẩm
+              Giới thiệu món ăn
             </h3>
             <Form.Item name="introduction">
               <Input
@@ -250,7 +250,7 @@ export default function AddForm({ categories, brands, updateValues }) {
 
             <Form.Item>
               <h3 className="font-quicksand font-semibold mb-2">
-                Mô tả sản phẩm
+                Mô tả món ăn
               </h3>
               <ReactQuill
                 theme="snow"
@@ -260,9 +260,7 @@ export default function AddForm({ categories, brands, updateValues }) {
             </Form.Item>
 
             <Form.Item>
-              <h3 className="font-quicksand font-semibold mb-2">
-                Hình sản phẩm
-              </h3>
+              <h3 className="font-quicksand font-semibold mb-2">Hình món ăn</h3>
               <ImageUploading
                 multiple
                 value={images}
@@ -295,7 +293,7 @@ export default function AddForm({ categories, brands, updateValues }) {
                       <UploadOutlined className="text-4xl mr-4 opacity-80" />
                       <span className="text-2xl font-quicksand opacity-90">
                         {" "}
-                        Nhấn hoặc kéo để chọn hình sản phẩm
+                        Nhấn hoặc kéo để chọn hình món ăn
                       </span>
                     </button>
                     &nbsp; */}
@@ -347,7 +345,7 @@ export default function AddForm({ categories, brands, updateValues }) {
                     : "bg-red-600 hover:bg-red-800"
                 }`}
               >
-                Cập nhật sản phẩm
+                Cập nhật món ăn
               </Button>
             </Form.Item>
           </Form>

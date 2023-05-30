@@ -13,7 +13,7 @@ import Toast from "../../../utils/components/Toast";
 import { brandPlaceHolder } from "../../../static/UserForm";
 import useAdminArea from "../../../utils/hooks/Admin/useAdminArea";
 
-export default function AddForm() {
+export default function AddForm({ handleChangeInput }) {
   const dispatch = useDispatch();
   const signUpSubmit = async (values) => {
     dispatch(addBrand(values)).unwrap();
@@ -58,11 +58,9 @@ export default function AddForm() {
         >
           {isSelectedBranch ? (
             <div>
-              <h3 className=" font-bold mb-5 text-3xl">Thông tin nhãn hàng</h3>
+              <h3 className=" font-bold mb-5 text-3xl">Thông tin hãng</h3>
               <Form form={form} onFinish={handleSubmit}>
-                <h3 className="font-quicksand font-semibold mb-2">
-                  Tên nhãn hàng
-                </h3>
+                <h3 className="font-quicksand font-semibold mb-2">Tên hãng</h3>
                 {errors?.name ? (
                   <Form.Item
                     name="name"
@@ -71,6 +69,7 @@ export default function AddForm() {
                     help={errors.name}
                   >
                     <Input
+                      handleChangeInput={handleChangeInput}
                       onFocus={() => handleFocusPlaceHolder("name")}
                       onBlur={handleBlurPlaceHolder}
                       placeholder={placeHolder.name}
@@ -100,6 +99,7 @@ export default function AddForm() {
                     help={errors.phone_number}
                   >
                     <Input
+                      handleChangeInput={handleChangeInput}
                       onFocus={() => handleFocusPlaceHolder("phone_number")}
                       onBlur={handleBlurPlaceHolder}
                       placeholder={placeHolder.phone_number}
@@ -127,6 +127,7 @@ export default function AddForm() {
                     help={errors.email}
                   >
                     <Input
+                      handleChangeInput={handleChangeInput}
                       onFocus={() => handleFocusPlaceHolder("email")}
                       onBlur={handleBlurPlaceHolder}
                       placeholder={placeHolder.email}
@@ -159,7 +160,7 @@ export default function AddForm() {
                     htmlType="submit"
                     className="btn-primary border-none p-8 ml-auto text-2xl flex items-center justify-center font-bold"
                   >
-                    Thêm nhãn hàng
+                    Thêm hãng
                   </Button>
                 </Form.Item>
               </Form>

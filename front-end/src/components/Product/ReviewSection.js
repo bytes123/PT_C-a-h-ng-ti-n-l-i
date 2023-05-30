@@ -33,7 +33,6 @@ export default function ReviewSection({ className, rateList }) {
                         <Time timestamp={item.createdAt} />
                       </p>
                       <div className="flex mb-2">
-                        <span className="min-w-[100px]">Size: {item.size}</span>
                         <StarpointSection starpoint={item.starpoint} />
                       </div>
                       <p className="rate-content font-semibold opacity-70 text-2xl leading-9">

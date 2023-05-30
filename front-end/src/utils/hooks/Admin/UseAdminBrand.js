@@ -16,6 +16,7 @@ import {
   fetchSearchBrand,
   searchBrand,
   deleteBrand,
+  resetAllErrors,
 } from "../../../features/brand/brandSlice";
 import { useLocation } from "react-router-dom";
 export default function useAdminBrand(
@@ -43,6 +44,10 @@ export default function useAdminBrand(
     value: false,
     body: "",
   });
+
+  const handleChangeInput = () => {
+    dispatch(resetAllErrors());
+  };
 
   const resetToast = () => {
     setIsToast({
@@ -217,9 +222,7 @@ export default function useAdminBrand(
 
   useEffect(() => {
     console.log(fetch_brands);
-    if (fetch_brands?.length) {
-      setBrands(fetch_brands);
-    }
+    setBrands(fetch_brands);
   }, [fetch_brands]);
 
   const handleConfirmDelete = async (id) => {
@@ -238,5 +241,6 @@ export default function useAdminBrand(
     isToast,
     handleConfirmDelete,
     isLoading,
+    handleChangeInput,
   };
 }

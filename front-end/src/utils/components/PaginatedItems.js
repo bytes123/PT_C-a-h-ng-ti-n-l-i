@@ -18,8 +18,8 @@ export default function PaginatedItems({
         pageLinkClassName="w-full h-full flex items-center justify-center paginated-btn rounded-full"
         previousLinkClassName="w-full h-full flex items-center justify-center paginated-btn rounded-full"
         nextLinkClassName="w-full h-full flex items-center justify-center paginated-btn rounded-full"
-        activeClassName="bg-green-600"
-        activeLinkClassName="bg-green-600 text-white"
+        activeClassName="bg-red-600"
+        activeLinkClassName="bg-red-600 text-white"
         disabledLinkClassName="disabled"
         previousLabel={previousLabel}
         nextLabel={nextLabel}

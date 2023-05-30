@@ -69,13 +69,13 @@ export default function AddForm({ categories, brands, branches }) {
         >
           {isSelectedBranch ? (
             <div>
-              <h3 className=" font-bold mb-10 text-3xl">Thông tin sản phẩm</h3>
+              <h3 className=" font-bold mb-10 text-3xl">Thông tin món ăn</h3>
 
               <Form form={form} onFinish={handleSubmit}>
                 {errors?.name ? (
                   <>
                     <h3 className="font-quicksand font-semibold mb-2">
-                      Tên sản phẩm
+                      Tên món ăn
                     </h3>
                     <Form.Item
                       onChange={() => clearErrors("name")}
@@ -95,7 +95,7 @@ export default function AddForm({ categories, brands, branches }) {
                 ) : (
                   <>
                     <h3 className="font-quicksand font-semibold mb-2">
-                      Tên sản phẩm
+                      Tên món ăn
                     </h3>
                     <Form.Item name="name" rules={rules.name}>
                       <Input
@@ -133,7 +133,7 @@ export default function AddForm({ categories, brands, branches }) {
                 </Form.Item>
 
                 <h3 className="font-quicksand font-semibold mb-2">
-                  Giới thiệu sản phẩm
+                  Giới thiệu món ăn
                 </h3>
                 <Form.Item name="introduction">
                   <Input
@@ -146,7 +146,7 @@ export default function AddForm({ categories, brands, branches }) {
 
                 <Form.Item>
                   <h3 className="font-quicksand font-semibold mb-2">
-                    Mô tả sản phẩm
+                    Mô tả món ăn
                   </h3>
                   <ReactQuill
                     theme="snow"
@@ -157,7 +157,7 @@ export default function AddForm({ categories, brands, branches }) {
 
                 <Form.Item>
                   <h3 className="font-quicksand font-semibold mb-2">
-                    Hình sản phẩm (Chọn tối đa 3 hình)
+                    Hình món ăn (Chọn tối đa 3 hình)
                   </h3>
                   <ImageUploading
                     multiple
@@ -190,7 +190,7 @@ export default function AddForm({ categories, brands, branches }) {
                           <UploadOutlined className="text-4xl mr-4 opacity-80" />
                           <span className="text-2xl font-quicksand opacity-90">
                             {" "}
-                            Nhấn hoặc kéo để chọn hình sản phẩm
+                            Nhấn hoặc kéo để chọn hình món ăn
                           </span>
                         </button>
                         &nbsp;
@@ -242,7 +242,7 @@ export default function AddForm({ categories, brands, branches }) {
                     htmlType="submit"
                     className="btn-primary border-none p-8 ml-auto text-2xl flex items-center justify-center font-bold"
                   >
-                    Thêm sản phẩm
+                    Thêm món ăn
                   </Button>
                 </Form.Item>
               </Form>

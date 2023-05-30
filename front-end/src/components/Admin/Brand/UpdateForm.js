@@ -62,13 +62,13 @@ export default function UpdateForm({ updateValues }) {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
           }}
         >
-          <h3 className=" font-bold mb-5 text-3xl">Thông tin nhãn hàng</h3>
+          <h3 className=" font-bold mb-5 text-3xl">Thông tin hãng</h3>
           <Form
             form={form}
             onFinish={handleSubmit}
             initialValues={updateValues}
           >
-            <h3 className="font-quicksand font-semibold mb-2">Tên nhãn hàng</h3>
+            <h3 className="font-quicksand font-semibold mb-2">Tên hãng</h3>
             {errors?.name ? (
               <Form.Item
                 onChange={handleChangeInput}
@@ -180,7 +180,7 @@ export default function UpdateForm({ updateValues }) {
                     : "bg-red-600 hover:bg-red-800"
                 }`}
               >
-                Cập nhật nhãn hàng
+                Cập nhật hãng
               </Button>
             </Form.Item>
           </Form>

@@ -57,20 +57,14 @@ export default function AddForm({ products }) {
           {isSelectedBranch ? (
             <div>
               <h3 className=" font-bold mb-10 text-3xl">
-                Thông tin loại sản phẩm
+                Thông tin loại món ăn
               </h3>
 
               <Form form={form} onFinish={handleSubmit}>
                 <Form.Item>
-                  <h3 className="font-quicksand font-semibold mb-2">
-                    Sản phẩm
-                  </h3>
+                  <h3 className="font-quicksand font-semibold mb-2">món ăn</h3>
                   <Form.Item name="product_id" rules={rules.product_id}>
-                    <Select
-                      placeholder="Tìm kiếm sản phẩm"
-                      showSearch
-                      allowClear
-                    >
+                    <Select placeholder="Tìm kiếm món ăn" showSearch allowClear>
                       {products.length &&
                         products
                           .filter((item) => item.branch_id == selectedBranch)
@@ -78,18 +72,6 @@ export default function AddForm({ products }) {
                             <Option value={item.id}>{item.name}</Option>
                           ))}
                     </Select>
-                  </Form.Item>
-
-                  <h3 className="font-quicksand font-semibold mb-2">
-                    Kích thước
-                  </h3>
-                  <Form.Item name="size" rules={rules.size}>
-                    <Input
-                      onFocus={() => handleFocusPlaceHolder("size")}
-                      onBlur={handleBlurPlaceHolder}
-                      placeholder={placeHolder.size}
-                      className="font-medium"
-                    />
                   </Form.Item>
 
                   <h3 className="font-quicksand font-semibold mb-2">
@@ -133,7 +115,7 @@ export default function AddForm({ products }) {
                     htmlType="submit"
                     className="btn-primary border-none p-8 ml-auto text-2xl flex items-center justify-center font-bold"
                   >
-                    Thêm chi tiết sản phẩm
+                    Thêm chi tiết món ăn
                   </Button>
                 </Form.Item>
               </Form>

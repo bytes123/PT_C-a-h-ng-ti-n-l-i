@@ -28,7 +28,7 @@ var Products = {
       .join(", ");
 
     const sql = `INSERT INTO products (${columns}) VALUES (${values})`;
-
+    console.log(sql);
     return sqlConnection.query(sql, callback);
   },
   updateProduct: (data, callback) => {

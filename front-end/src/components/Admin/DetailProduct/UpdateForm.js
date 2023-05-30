@@ -63,7 +63,7 @@ export default function Update({ products, updateValues }) {
             boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
           }}
         >
-          <h3 className=" font-bold mb-10 text-3xl">Thông tin loại sản phẩm</h3>
+          <h3 className=" font-bold mb-10 text-3xl">Thông tin loại món ăn</h3>
 
           <Form
             form={form}
@@ -71,11 +71,11 @@ export default function Update({ products, updateValues }) {
             initialValues={updateValues}
           >
             <Form.Item>
-              <h3 className="font-quicksand font-semibold mb-2">Sản phẩm</h3>
+              <h3 className="font-quicksand font-semibold mb-2">món ăn</h3>
               <Form.Item name="product_id" rules={rules.product_id}>
                 <Select
                   showSearch
-                  placeholder="Chọn sản phẩm"
+                  placeholder="Chọn món ăn"
                   allowClear
                   onChange={handleChangeProduct}
                 >
@@ -151,7 +151,7 @@ export default function Update({ products, updateValues }) {
                     : "bg-red-600 hover:bg-red-800"
                 }`}
               >
-                Cập nhật chi tiết sản phẩm
+                Cập nhật chi tiết món ăn
               </Button>
             </Form.Item>
           </Form>

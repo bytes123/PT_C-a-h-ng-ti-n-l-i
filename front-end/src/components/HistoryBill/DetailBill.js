@@ -78,9 +78,7 @@ export default function DetailBill({
                   <div className="ml-5 flex justify-between w-full items-center">
                     <div>
                       <p className="text-3xl mb-2">{item?.name}</p>
-                      <p className="text-2xl mb-2 text-slate-500">
-                        Phân loại hàng: {item?.size}
-                      </p>
+
                       <p className="text-3xl mb-2">x{item?.quantity}</p>
                     </div>
                     <div className="text-2xl">

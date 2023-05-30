@@ -40,8 +40,6 @@ export default function HeaderCart({ cart, onFetchCart, cartPrice }) {
                       {item.name}
                     </Link>
 
-                    <p className="text-2xl mb-5">Size: {item.size}</p>
-
                     <p className="text-2xl mb-5">
                       {item.quantity} x{" "}
                       {item?.newPrice?.toLocaleString("it-IT", {

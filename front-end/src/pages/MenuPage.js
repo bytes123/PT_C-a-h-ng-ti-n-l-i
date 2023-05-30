@@ -8,7 +8,7 @@ export default function MenuPage() {
   const { id } = useParams();
   let navigate = useNavigate();
   useEffect(() => {
-    navigate("coffe");
+    navigate("main");
   }, []);
 
   return (

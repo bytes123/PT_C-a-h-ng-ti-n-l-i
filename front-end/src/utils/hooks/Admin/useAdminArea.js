@@ -36,13 +36,6 @@ export default function useAdminArea() {
   useEffect(() => {
     if (fetch_branch.length) {
       let temp = fetch_branch;
-      temp = [
-        {
-          id: "all",
-          name: "Tất cả",
-        },
-        ...temp,
-      ];
 
       setBranches(temp);
     }

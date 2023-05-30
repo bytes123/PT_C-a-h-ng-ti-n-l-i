@@ -57,6 +57,7 @@ export default function MainBrand() {
     isToast,
     handleConfirmDelete,
     isLoading,
+    handleChangeInput,
   } = useAdminBrand(handleCloseAdd, handleCloseEdit, handleCloseDelete);
 
   const columns = [
@@ -66,7 +67,7 @@ export default function MainBrand() {
       render: (data, arr, index) => index + 1,
     },
     {
-      title: "Tên nhãn hàng",
+      title: "Tên hãng",
       dataIndex: "name",
       key: "name",
       render: (data, arr, index) => <p>{data}</p>,
@@ -160,7 +161,7 @@ export default function MainBrand() {
       ) : (
         ""
       )}
-      <h1 className="text-4xl font-bold m-5">Quản lý nhãn hàng</h1>
+      <h1 className="text-4xl font-bold m-5">Quản lý hãng</h1>
 
       {isAdd && (
         <>
@@ -174,8 +175,8 @@ export default function MainBrand() {
           </Section>
           <Section span={24}>
             <div className="wrapper p-8 ">
-              <h3 className="text-2xl font-bold">Thêm nhãn hàng</h3>
-              <AddForm />
+              <h3 className="text-2xl font-bold">Thêm hãng</h3>
+              <AddForm handleChangeInput={handleChangeInput} />
             </div>
           </Section>
         </>
@@ -193,7 +194,7 @@ export default function MainBrand() {
           </Section>
           <Section span={24}>
             <div className="wrapper p-8 ">
-              <h3 className="text-2xl font-bold">Cập nhật nhãn hàng</h3>
+              <h3 className="text-2xl font-bold">Cập nhật hãng</h3>
               <UpdateForm updateValues={values} />
             </div>
           </Section>
@@ -207,15 +208,15 @@ export default function MainBrand() {
               className="form-btn confirm-btn p-4 mr-5 text-right "
               onClick={handleOpenAdd}
             >
-              Thêm nhãn hàng
+              Thêm hãng
             </button>
           </Section>
           <Section span={24}>
             <div className="wrapper p-8">
-              <h3 className="text-2xl font-bold mb-5">Danh sách nhãn hàng</h3>
+              <h3 className="text-2xl font-bold mb-5">Danh sách hãng</h3>
               <Search
                 className="w-[400px]  my-5 "
-                placeholder="Nhập tên nhãn hàng để tìm kiếm"
+                placeholder="Nhập tên hãng để tìm kiếm"
                 enterButton="Tìm kiếm"
                 size="large"
                 onSearch={onSearch}

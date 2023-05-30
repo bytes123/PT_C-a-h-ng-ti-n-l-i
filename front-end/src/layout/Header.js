@@ -124,7 +124,7 @@ export default function Header({ className }) {
         <HeaderBarIcon active={isBarActive} onClick={handleMobileBar} />
         <div className="header_image-wrapper">
           <img
-            src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/logo.svg"
+            src="http://localhost:8000/resources/images/kfc2.png"
             className="cursor-pointer w-[140px]"
             onClick={() => navigate("/")}
           />

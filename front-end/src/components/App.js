@@ -269,7 +269,17 @@ const App = () => {
         />
 
         {/* MENU ROUTE */}
-        {/* <Route
+        <Route
+          path="thuc-don"
+          element={
+            <Layout className="h-full bg-white">
+              <Header />
+              <MenuItemPage />
+              <Footer />
+            </Layout>
+          }
+        />
+        <Route
           path="thuc-don/:menuid"
           element={
             <Layout className="h-full bg-white">
@@ -290,7 +300,7 @@ const App = () => {
           }
         />
 
-        <Route
+        {/* <Route
           path="xac-thuc-tai-khoan/:auth_token"
           element={
             <Layout className="h-full bg-white">

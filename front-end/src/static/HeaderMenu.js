@@ -14,7 +14,7 @@ const DesktopMenu = [
   // },
   {
     key: "menu",
-    link: path.menu + "/banh-ngot",
+    link: path.menu,
     value: "Thực đơn",
   },
   // {
@@ -117,25 +117,4 @@ const MobileMenuLogin = [
   },
 ];
 
-const menuData = [
-  {
-    key: "coffe",
-    value: "Cà phê",
-    children: [
-      {
-        key: "coffe-fin",
-        value: "Cà phê phin",
-      },
-      {
-        key: "phindi",
-        value: "PhinDi",
-      },
-      {
-        key: "coffe-espresso",
-        value: "Cà phê espresso",
-      },
-    ],
-  },
-];
-
-export { DesktopMenu, MobileMenu, MobileMenuLogin, menuData };
+export { DesktopMenu, MobileMenu, MobileMenuLogin };

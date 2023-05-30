@@ -14,9 +14,15 @@ import useClassifySection from "../utils/hooks/useClassifySection";
 import { ProductData } from "../static/Data";
 import ClassifyItemSection from "../components/Product/ClassifyItemSection";
 import useProducts from "../utils/hooks/useProducts";
-
+import useAdminCategory from "../utils/hooks/Admin/useAdminCategory";
+import {
+  fetchCategoryAndChildren,
+  getCategoryAndChildren,
+} from "../features/category/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
 export default function MenuItemPage() {
   const { menuid } = useParams();
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -71,30 +77,24 @@ export default function MenuItemPage() {
     return () => clearTimeout(waitLoading);
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchCategoryAndChildren()).unwrap();
+  }, []);
+
   const [currentItems, pageCount, handlePageClick] = usePagination(products, 4);
+
+  const category_children = useSelector(getCategoryAndChildren);
 
   return (
     <>
       <MainLoading isLoading={isLoading} />
       <div className="menu_item-wrapper">
         <Banner1 />
-        <MenuList data={ProductData} />
+        <MenuList data={category_children} />
 
         <div className="lg:grid lg:grid-cols-4 lg:px-10">
           <div className="lg:col-span-3">
-            <div className="mt-10">
-              <ClassifySection
-                className="justify-between"
-                text="sản phẩm"
-                activeIndex={activeIndex}
-                data={classifyMenu}
-                onSwitch={handleSwitch}
-                activeDisplayIndex={activeDisplayIndex}
-                onActiveDisplayIndex={handleActiveDisplayIndex}
-                activeSortIndex={activeSortIndex}
-                onActiveSortIndex={handleActiveSortIndex}
-              />
-            </div>
+            <div className="mt-10"></div>
             <div className="container mx-auto py-10">
               <ItemList currentItems={currentItems} gridCol={4} />
 
@@ -105,10 +105,8 @@ export default function MenuItemPage() {
                 handlePageClick={handlePageClick}
                 pageCount={pageCount}
               />
-              <ClassifyItemSection className={" lg:hidden block"} />
             </div>
           </div>
-          <ClassifyItemSection className={"py-10 lg:block hidden"} />
         </div>
       </div>
     </>

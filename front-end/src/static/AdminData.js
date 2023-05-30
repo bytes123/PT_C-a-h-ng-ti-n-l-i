@@ -57,13 +57,13 @@ const sideBarList = [
         key: 2,
         link: "quan-ly-san-pham",
         icon: <AiOutlineShoppingCart />,
-        text: "Quản lý loại sản phẩm",
+        text: "Quản lý loại món ăn",
       },
       {
         key: 3,
         link: "quan-ly-loai-san-pham",
         icon: <FiPackage />,
-        text: "Quản lý chi tiết sản phẩm",
+        text: "Quản lý chi tiết món ăn",
       },
 
       // {
@@ -212,7 +212,7 @@ const commomBoxList = [
     key: 2,
     icon: <AiOutlineShoppingCart />,
     bg: "bg-amber-300",
-    text: "Sản phẩm",
+    text: "món ăn",
   },
   {
     key: 3,

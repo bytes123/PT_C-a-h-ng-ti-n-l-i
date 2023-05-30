@@ -59,7 +59,7 @@ module.exports = {
           password: password,
           avatar: avatar,
           email: data.email,
-          isAuth: true,
+          isAuth: 1,
 
           createdAt: new Date(),
         }
@@ -67,7 +67,7 @@ module.exports = {
           user_name: data.user_name,
           password: password,
           email: data.email,
-          isAuth: true,
+          isAuth: 1,
 
           createdAt: new Date(),
         };
@@ -83,6 +83,7 @@ module.exports = {
       district_name: data.user_district.district_name,
       ward_id: data.user_ward.ward_id,
       ward_name: data.user_ward.ward_name,
+      address: data.address,
     };
 
     const detail_type_user = [
@@ -105,34 +106,30 @@ module.exports = {
         if (notifications.length > 0) {
           return result.send(notifications);
         } else {
-          User.deleteUserNotAuth(user, (err, res) => {
-            if (!err) {
-              User.setUser(user, (err, res) => {
+          User.setUser(user, (err, res) => {
+            if (err) {
+              console.log(err);
+              return result.status(400).json(err);
+            } else {
+              User.setCustomer(customer, (err, res) => {
                 if (err) {
+                  console.log(err);
                   return result.status(400).json(err);
                 } else {
-                  User.setCustomer(customer, (err, res) => {
-                    if (err) {
-                      console.log(err);
-                      return result.status(400).json(err);
-                    } else {
-                      detail_type_user.forEach((item) => {
-                        User.setDetailTypeUser(item, (err, res) => {
-                          if (err) {
-                            return result.status(400).json(err);
-                          }
-                        });
-                      });
-
-                      notifications.push("SIGNUP_SUCCESS");
-
-                      return result.send(notifications);
-                    }
+                  detail_type_user.forEach((item) => {
+                    User.setDetailTypeUser(item, (err, res) => {
+                      if (err) {
+                        console.log(err);
+                        return result.status(400).json(err);
+                      }
+                    });
                   });
+
+                  notifications.push("SIGNUP_SUCCESS");
+
+                  return result.send(notifications);
                 }
               });
-            } else {
-              return result.status(400).json(err);
             }
           });
         }
@@ -442,8 +439,15 @@ module.exports = {
     const salt = await bcrypt.genSalt(10);
 
     User.getUser(data, async (err, res) => {
+      if (err) {
+        return result.status(500).json(err);
+      }
       if (res.recordset.length) {
         User.getUserConfirmed(data, async (err, res) => {
+          if (err) {
+            return result.status(500).json(err);
+          }
+          console.log(res);
           if (res.recordset.length) {
             const validPassword = await bcrypt.compare(
               data.password,
@@ -458,15 +462,19 @@ module.exports = {
                     user: res.recordset[0],
                     type_user: type_user.recordset,
                   };
+
                   return result.send(data);
                 } else {
                   const data = res[0];
+
                   return result.send(data);
                 }
               });
             } else {
               return result.status(200).json("FAILED_LOGIN");
             }
+          } else {
+            return result.status(200).json("FAILED_LOGIN");
           }
         });
       } else {

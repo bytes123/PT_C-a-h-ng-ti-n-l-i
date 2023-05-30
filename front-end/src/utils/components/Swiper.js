@@ -20,14 +20,14 @@ export default function Swiper() {
       <SwiperSlide className="h-[380px]">
         <img
           className="object-cover w-100"
-          src="https://queenpack.com.vn/wp-content/uploads/2021/11/banner-queenpack-01.jpeg"
+          src="http://localhost:8000/resources/images/kfc-banner.jpg"
           alt=""
         />
       </SwiperSlide>
       <SwiperSlide className="h-[380px]">
         <img
           className="object-cover w-100"
-          src="https://caylahoa.com/wp-content/uploads/2019/09/banner-banh-trung-thu-tiem-an-ba-zu.jpg"
+          src="http://localhost:8000/resources/images/kfc1-banner.jpg"
           alt=""
         />
       </SwiperSlide>

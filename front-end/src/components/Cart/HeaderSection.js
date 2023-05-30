@@ -12,12 +12,6 @@ export default function HeaderSection() {
 
   return (
     <div className="header_section flex mr-5  block ">
-      <div className="header_wishlist mr-3">
-        <Link to="/yeu-thich" className="relative">
-          <AiOutlineHeart className="text-5xl mx-2 opacity-70" />
-          <span className="quanity-wishlist-card">0</span>
-        </Link>
-      </div>
       <div className="header_cart relative">
         <Link to="/gio-hang" className="relative">
           <AiOutlineShoppingCart className="text-5xl mx-2 opacity-70" />

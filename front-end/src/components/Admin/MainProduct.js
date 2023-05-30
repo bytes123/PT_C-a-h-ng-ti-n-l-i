@@ -84,7 +84,7 @@ export default function MainProduct() {
         setIsToast({
           style: "failed",
           value: true,
-          body: "Vui lòng nhập tên sản phẩm để tìm kiếm",
+          body: "Vui lòng nhập tên món ăn để tìm kiếm",
         })
       );
     } else {
@@ -101,13 +101,13 @@ export default function MainProduct() {
       render: (data, arr, index) => index + 1,
     },
     {
-      title: "Tên sản phẩm",
+      title: "Tên món ăn",
       dataIndex: "name",
       key: "name",
       render: (data, arr, index) => <p className="capitalize">{data}</p>,
     },
     {
-      title: "Hình sản phẩm",
+      title: "Hình món ăn",
       dataIndex: "image1",
       key: "image1",
       render: (data, arr, index) => (
@@ -194,7 +194,7 @@ export default function MainProduct() {
         body={isToast?.body}
         isSuccess={isToast?.value}
       />
-      <h1 className="text-4xl font-bold m-5">Quản lý loại sản phẩm</h1>
+      <h1 className="text-4xl font-bold m-5">Quản lý món ăn</h1>
 
       {isAdd && (
         <>
@@ -208,14 +208,14 @@ export default function MainProduct() {
           </Section>
           <Section span={24}>
             <div className="wrapper p-8 ">
-              <h3 className="text-2xl font-bold">Thêm sản phẩm</h3>
+              <h3 className="text-2xl font-bold">Thêm món ăn</h3>
               <AddForm
                 categories={categories}
                 brands={brands}
                 branches={branches}
               />
               {/* <p className="admin_catalog-add-content m-5">
-            Chọn 1 tệp Excel bao gồm danh sách sản phẩm
+            Chọn 1 tệp Excel bao gồm danh sách món ăn
           </p>
           <div className="catalog_upload-wrapper">
             <UploadFileExcel dataCheck={catalogDataCheck} />
@@ -237,7 +237,7 @@ export default function MainProduct() {
           </Section>
           <Section span={24}>
             <div className="wrapper p-8 ">
-              <h3 className="text-2xl font-bold">Cập nhật sản phẩm</h3>
+              <h3 className="text-2xl font-bold">Cập nhật món ăn</h3>
               <UpdateForm
                 categories={categories}
                 brands={brands}
@@ -255,15 +255,15 @@ export default function MainProduct() {
               className="form-btn confirm-btn p-4 mr-5 text-right "
               onClick={handleOpenAdd}
             >
-              Thêm sản phẩm
+              Thêm món ăn
             </button>
           </Section>
           <Section span={24}>
             <div className="wrapper p-8">
-              <h3 className="text-2xl font-bold mb-5">Danh sách sản phẩm</h3>
+              <h3 className="text-2xl font-bold mb-5">Danh sách món ăn</h3>
               <Search
                 className="w-[400px]  my-5 "
-                placeholder="Nhập tên sản phẩm để tìm kiếm"
+                placeholder="Nhập tên món ăn để tìm kiếm"
                 enterButton="Tìm kiếm"
                 size="large"
                 onSearch={onSearch}

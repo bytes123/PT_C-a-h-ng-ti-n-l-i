@@ -30,9 +30,7 @@ export default function MainRate({
           />
         </div>
         <div>
-          <span className="text-3xl ml-5">
-            {activeItem?.name} {activeItem?.size}
-          </span>
+          <span className="text-3xl ml-5">{activeItem?.name}</span>
         </div>
       </div>
       <div className="flex my-10">

@@ -23,7 +23,7 @@ var Category = {
       .join(", ");
 
     const sql = `INSERT INTO categories (${columns}) VALUES (${values})`;
-
+    console.log(sql);
     return sqlConnection.query(sql, callback);
   },
   updateCategory: (data, callback) => {

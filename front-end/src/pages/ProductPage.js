@@ -157,22 +157,7 @@ export default function ProductPage() {
                   {product?.introduction}
                 </p>
               </div>
-              <div className="product_size-wrapper mt-10 flex items-center font-bold ">
-                <span>Kích thước:</span>
-                <ul className="product_size-list ml-5 flex items-center cursor-pointer">
-                  {detailProduct.map((item, index) => (
-                    <li
-                      onClick={() => handleActiveIndex(index)}
-                      key={item.id}
-                      className={`product_size-item ${
-                        activeIndex == index ? "active" : ""
-                      } rounded-xl  mx-1 p-4`}
-                    >
-                      {item.size}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
               <div className="product_section mt-10 flex">
                 <Quantity
                   value={inputNumberValue}

@@ -43,7 +43,7 @@ var DetailProduct = {
       .join(", ");
 
     const sql = `INSERT INTO detail_products (${columns}) VALUES (${values})`;
-
+    console.log(sql);
     return sqlConnection.query(sql, callback);
   },
   updateDetailProduct: (data, callback) => {
